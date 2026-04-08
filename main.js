@@ -1,36 +1,79 @@
-// Cookie banner
+/* ── COOKIE BANNER ─────────────────────────────────── */
 function closeCookies() {
   const banner = document.getElementById('cookie-banner');
-  if (banner) {
-    banner.style.transition = 'opacity 0.3s';
-    banner.style.opacity = '0';
-    setTimeout(() => banner.remove(), 300);
+  if (!banner) return;
+  banner.style.transition = 'opacity .3s ease, transform .3s ease';
+  banner.style.opacity = '0';
+  banner.style.transform = 'translateY(100%)';
+  setTimeout(() => banner.remove(), 320);
+}
+
+/* ── MOBILE NAV ────────────────────────────────────── */
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  const btn   = document.querySelector('.hamburger');
+  if (!links) return;
+  const open = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  // Animate hamburger → X
+  const spans = btn.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity   = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
   }
 }
 
-// Mobile nav toggle
-function toggleMenu() {
-  const links = document.querySelector('.nav-links');
-  if (links) links.classList.toggle('open');
+/* Close menu on outside click */
+document.addEventListener('click', (e) => {
+  const nav = document.querySelector('.nav-inner');
+  if (nav && !nav.contains(e.target)) {
+    const links = document.querySelector('.nav-links');
+    const btn   = document.querySelector('.hamburger');
+    if (links && links.classList.contains('open')) {
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      const spans = btn.querySelectorAll('span');
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  }
+});
+
+/* ── NAVBAR SCROLL SHADOW ──────────────────────────── */
+const navbar = document.getElementById('navbar');
+if (navbar) {
+  const onScroll = () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 12);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const target = document.querySelector(this.getAttribute('href'));
+/* ── SMOOTH SCROLL ANCHORS ─────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const offset = 80; // navbar height
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
 
-// Navbar scroll shadow
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('.navbar');
-  if (nav) {
-    nav.style.boxShadow = window.scrollY > 10
-      ? '0 2px 16px rgba(0,0,0,0.12)'
-      : '0 1px 6px rgba(0,0,0,0.06)';
-  }
-});
+/* ── INTERSECTION OBSERVER — stagger cards ─────────── */
+if ('IntersectionObserver' in window) {
+  const cards = document.querySelectorAll('.svc-card, .tcard, .blog-card');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = `${(i % 4) * 80}ms`;
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(c => io.observe(c));
+}

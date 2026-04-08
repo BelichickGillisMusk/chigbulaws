@@ -4,78 +4,269 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Chigbu Law – Elk Grove, CA | 916-230-6381</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <meta name="description" content="Contact Clifford Chigbu Attorney at Law in Elk Grove, CA. Call 916-230-6381 or email chigbulaw@sbcglobal.net to schedule your consultation." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .contact-page { max-width: 700px; margin: 60px auto; padding: 0 24px; }
-    .contact-page h1 { font-family: var(--font-serif); font-size: 36px; color: var(--navy-dark); margin-bottom: 24px; }
-    .contact-info-block { background: var(--bg-white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); margin-bottom: 32px; }
-    .contact-info-block p { font-size: 16px; margin-bottom: 12px; color: var(--text-mid); }
-    .contact-info-block a { color: var(--navy); text-decoration: underline; }
-    .contact-form label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--navy-dark); }
-    .contact-form input, .contact-form textarea, .contact-form select {
-      width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius);
-      font-family: var(--font-sans); font-size: 14px; margin-bottom: 16px; background: var(--bg-white);
+    .page-hero {
+      background: var(--navy-deep);
+      padding: 56px var(--px) 48px;
+      text-align: center;
     }
-    .contact-form textarea { height: 120px; resize: vertical; }
-    .contact-form button {
-      background: var(--navy); color: #fff; padding: 12px 32px; border: none; border-radius: var(--radius);
-      font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--font-sans);
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 12px;
     }
-    .contact-form button:hover { background: var(--navy-mid); }
+    .page-hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,.65);
+    }
+    .contact-page-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 56px var(--px) 80px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .contact-info-col h2 {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--navy-deep);
+      margin-bottom: 24px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon svg { color: #fff; }
+    .contact-info-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-500);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 3px;
+    }
+    .contact-info-text a, .contact-info-text span {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: color var(--t-fast);
+    }
+    .contact-info-text a:hover { color: var(--gold-dim); }
+    .bar-info {
+      margin-top: 28px;
+      padding: 16px;
+      background: var(--cream);
+      border-radius: var(--r-md);
+      border: 1px solid var(--border);
+    }
+    .bar-info p { font-size: 13.5px; color: var(--text-700); line-height: 1.6; }
+    .bar-info a { color: var(--navy); text-decoration: underline; }
+    .contact-form-col {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+    .contact-form-col h2 {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--navy-deep);
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-700);
+      margin-bottom: 6px;
+      letter-spacing: .01em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-sm);
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--text-900);
+      background: var(--white);
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(26,39,68,.1);
+    }
+    .form-group textarea { height: 130px; resize: vertical; }
+    .form-submit {
+      width: 100%;
+      background: var(--navy);
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: var(--r-sm);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      cursor: pointer;
+      transition: background var(--t-base), box-shadow var(--t-base);
+      box-shadow: var(--shadow-sm);
+    }
+    .form-submit:hover { background: var(--navy-mid); box-shadow: var(--shadow-md); }
+    .form-disclaimer {
+      font-size: 11.5px;
+      color: var(--text-500);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .contact-page-body { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar">
+
+  <header class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="logo-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="#1a2744" stroke-width="2"/><path d="M10 22 L18 10 L26 22" stroke="#1a2744" stroke-width="2" fill="none"/><line x1="8" y1="22" x2="28" y2="22" stroke="#1a2744" stroke-width="2"/><line x1="18" y1="22" x2="18" y2="28" stroke="#1a2744" stroke-width="2"/><line x1="14" y1="28" x2="22" y2="28" stroke="#1a2744" stroke-width="2"/></svg>
-        </div>
+      <a href="index.html" class="nav-logo">
+        <svg class="logo-scales" width="42" height="42" viewBox="0 0 42 42" fill="none">
+          <circle cx="21" cy="21" r="20" stroke="#1a2744" stroke-width="1.5"/>
+          <line x1="21" y1="8" x2="21" y2="34" stroke="#1a2744" stroke-width="1.5"/>
+          <line x1="10" y1="14" x2="32" y2="14" stroke="#1a2744" stroke-width="1.5"/>
+          <path d="M10 14 L7 21 Q10 25 13 21 L10 14Z" fill="#1a2744" opacity="0.15" stroke="#1a2744" stroke-width="1"/>
+          <path d="M32 14 L29 21 Q32 25 35 21 L32 14Z" fill="#1a2744" opacity="0.15" stroke="#1a2744" stroke-width="1"/>
+          <line x1="16" y1="34" x2="26" y2="34" stroke="#1a2744" stroke-width="1.5"/>
+        </svg>
         <div class="logo-text">
           <span class="logo-name">CLIFFORD CHIGBU</span>
-          <span class="logo-sub">ATTORNEY AT LAW</span>
-          <span class="logo-url">chigbulaws.com</span>
+          <span class="logo-tagline">ATTORNEY AT LAW &nbsp;·&nbsp; chigbulaws.com</span>
         </div>
       </a>
-      <div class="nav-links">
-        <a href="/" class="nav-link">Home</a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="contact.html" class="nav-link">Contact</a>
-      </div>
-      <a href="tel:9162306381" class="btn-appointment">Call 916-230-6381</a>
+      </nav>
+      <a href="tel:9162306381" class="btn-appt">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:6px"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        916-230-6381
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </header>
 
-  <div class="contact-page">
+  <div class="page-hero">
     <h1>Contact Chigbu Law</h1>
-    <div class="contact-info-block">
-      <p><strong>Phone:</strong> <a href="tel:9162306381">916-230-6381</a></p>
-      <p><strong>Email:</strong> <a href="mailto:chigbulaw@sbcglobal.net">chigbulaw@sbcglobal.net</a></p>
-      <p><strong>Address:</strong> 4815 Laguna Park Drive, Elk Grove, CA 95758</p>
-      <p><strong>Bar #:</strong> Clifford C Chigbu #221386 — License Status: Active</p>
+    <p>Schedule a consultation — we're here to help you navigate life's legal challenges.</p>
+  </div>
+
+  <div class="contact-page-body">
+    <div class="contact-info-col">
+      <h2>Get in Touch</h2>
+
+      <div class="contact-info-item">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="contact-info-text">
+          <strong>Phone</strong>
+          <a href="tel:9162306381">916-230-6381</a>
+        </div>
+      </div>
+
+      <div class="contact-info-item">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-info-text">
+          <strong>Email</strong>
+          <a href="mailto:chigbulaw@sbcglobal.net">chigbulaw@sbcglobal.net</a>
+        </div>
+      </div>
+
+      <div class="contact-info-item">
+        <div class="contact-info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="contact-info-text">
+          <strong>Office</strong>
+          <span>4815 Laguna Park Drive<br>Elk Grove, CA 95758</span>
+        </div>
+      </div>
+
+      <div class="bar-info">
+        <p><strong>Clifford C Chigbu</strong><br>
+        State Bar of California #221386<br>
+        License Status: <strong style="color:#16a34a">Active</strong><br>
+        <a href="https://apps.calbar.ca.gov/attorney/Licensee/Detail/221386" target="_blank" rel="noopener">Verify on California State Bar →</a></p>
+      </div>
     </div>
-    <div class="contact-info-block">
-      <form class="contact-form" onsubmit="return false;">
-        <label>Full Name</label>
-        <input type="text" placeholder="Your full name" />
-        <label>Phone Number</label>
-        <input type="tel" placeholder="(916) 000-0000" />
-        <label>Email Address</label>
-        <input type="email" placeholder="you@example.com" />
-        <label>Legal Matter</label>
-        <select>
-          <option>Family Law</option>
-          <option>Immigration Law</option>
-          <option>Business Law</option>
-          <option>Bankruptcy Law</option>
-          <option>Auto Accident</option>
-          <option>Personal Injury</option>
-          <option>Other</option>
-        </select>
-        <label>Message</label>
-        <textarea placeholder="Briefly describe your legal matter..."></textarea>
-        <button type="submit">Send Message</button>
+
+    <div class="contact-form-col">
+      <h2>Schedule a Consultation</h2>
+      <form onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="(916) 000-0000" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="matter">Legal Matter</label>
+          <select id="matter" name="matter">
+            <option value="">Select a practice area...</option>
+            <option>Family Law</option>
+            <option>Immigration Law</option>
+            <option>Business Law</option>
+            <option>Bankruptcy Law</option>
+            <option>Auto Accident</option>
+            <option>Personal Injury</option>
+            <option>Estate Planning</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Brief Description</label>
+          <textarea id="message" name="message" placeholder="Briefly describe your legal matter..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+        <p class="form-disclaimer">By submitting this form, you agree that contacting Chigbu Law does not create an attorney-client relationship. Do not send confidential information.</p>
       </form>
     </div>
   </div>
@@ -84,8 +275,20 @@
     <div class="footer-inner">
       <div class="footer-bottom" style="border-top:none; padding-top:0;">
         <p>© 2025 Clifford Chigbu Attorney at Law. All rights reserved.</p>
+        <p>Phone: <a href="tel:9162306381" style="color:rgba(255,255,255,.5)">916-230-6381</a> &nbsp;·&nbsp; Email: <a href="mailto:chigbulaw@sbcglobal.net" style="color:rgba(255,255,255,.5)">chigbulaw@sbcglobal.net</a></p>
       </div>
     </div>
   </footer>
+
+  <script src="main.js"></script>
+  <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = '✓ Message Sent — We\'ll be in touch soon!';
+      btn.style.background = '#16a34a';
+      btn.disabled = true;
+    }
+  </script>
 </body>
 </html>

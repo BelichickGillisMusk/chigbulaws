@@ -4,65 +4,103 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Clifford Chigbu – Elk Grove Attorney at Law</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <meta name="description" content="Learn about Clifford Chigbu, top-rated attorney at law in Elk Grove, CA. Family law, immigration, business law and more. Call 916-230-6381." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .about-page { max-width: 820px; margin: 60px auto; padding: 0 24px 60px; }
-    .about-page h1 { font-family: var(--font-serif); font-size: 38px; color: var(--navy-dark); margin-bottom: 24px; }
-    .about-page h2 { font-family: var(--font-serif); font-size: 24px; color: var(--navy-dark); margin: 32px 0 12px; }
-    .about-page p { font-size: 15px; color: var(--text-mid); margin-bottom: 16px; line-height: 1.75; }
-    .about-highlight { background: var(--navy); color: #fff; padding: 32px; border-radius: var(--radius); margin: 32px 0; }
-    .about-highlight p { color: rgba(255,255,255,0.85); margin: 0; font-size: 16px; }
+    .page-hero { background: var(--navy-deep); padding: 56px var(--px) 48px; text-align: center; }
+    .page-hero h1 { font-family: var(--serif); font-size: clamp(28px,4vw,44px); font-weight:400; color:#fff; margin-bottom:12px; }
+    .page-hero p { font-size:16px; color:rgba(255,255,255,.65); }
+    .about-page-body { max-width:820px; margin:0 auto; padding:56px var(--px) 80px; }
+    .about-page-body h2 { font-family:var(--serif); font-size:28px; color:var(--navy-deep); margin:36px 0 14px; }
+    .about-page-body p { font-size:15.5px; color:var(--text-700); margin-bottom:16px; line-height:1.8; }
+    .pull-quote { background:var(--navy); color:#fff; padding:28px 32px; border-radius:var(--r-md); margin:32px 0; border-left:4px solid var(--gold); }
+    .pull-quote p { color:rgba(255,255,255,.9); font-size:17px; font-style:italic; margin:0; }
+    .credentials-box { background:var(--cream); border:1px solid var(--border); border-radius:var(--r-md); padding:24px; margin-top:32px; }
+    .credentials-box h3 { font-size:16px; font-weight:700; color:var(--navy-deep); margin-bottom:12px; }
+    .credentials-box p { font-size:14.5px; color:var(--text-700); margin-bottom:8px; }
+    .credentials-box a { color:var(--navy); text-decoration:underline; }
+    .status-active { color:#16a34a; font-weight:700; }
   </style>
 </head>
 <body>
-  <nav class="navbar">
+
+  <header class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="logo-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="#1a2744" stroke-width="2"/><path d="M10 22 L18 10 L26 22" stroke="#1a2744" stroke-width="2" fill="none"/><line x1="8" y1="22" x2="28" y2="22" stroke="#1a2744" stroke-width="2"/><line x1="18" y1="22" x2="18" y2="28" stroke="#1a2744" stroke-width="2"/><line x1="14" y1="28" x2="22" y2="28" stroke="#1a2744" stroke-width="2"/></svg>
-        </div>
+      <a href="index.html" class="nav-logo">
+        <svg class="logo-scales" width="42" height="42" viewBox="0 0 42 42" fill="none">
+          <circle cx="21" cy="21" r="20" stroke="#1a2744" stroke-width="1.5"/>
+          <line x1="21" y1="8" x2="21" y2="34" stroke="#1a2744" stroke-width="1.5"/>
+          <line x1="10" y1="14" x2="32" y2="14" stroke="#1a2744" stroke-width="1.5"/>
+          <path d="M10 14 L7 21 Q10 25 13 21 L10 14Z" fill="#1a2744" opacity="0.15" stroke="#1a2744" stroke-width="1"/>
+          <path d="M32 14 L29 21 Q32 25 35 21 L32 14Z" fill="#1a2744" opacity="0.15" stroke="#1a2744" stroke-width="1"/>
+          <line x1="16" y1="34" x2="26" y2="34" stroke="#1a2744" stroke-width="1.5"/>
+        </svg>
         <div class="logo-text">
           <span class="logo-name">CLIFFORD CHIGBU</span>
-          <span class="logo-sub">ATTORNEY AT LAW</span>
-          <span class="logo-url">chigbulaws.com</span>
+          <span class="logo-tagline">ATTORNEY AT LAW &nbsp;·&nbsp; chigbulaws.com</span>
         </div>
       </a>
-      <div class="nav-links">
-        <a href="/" class="nav-link">Home</a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="contact.html" class="nav-link">Contact</a>
-      </div>
-      <a href="contact.html" class="btn-appointment">Make an Appointment</a>
+      </nav>
+      <a href="contact.html" class="btn-appt">Make an Appointment</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </header>
 
-  <div class="about-page">
-    <h1>About Chigbu Law – Elk Grove, CA</h1>
-    <p>At Clifford Chigbu Attorney at Law, we are dedicated to providing expert legal representation to individuals and families throughout Elk Grove and the greater Sacramento area. Our firm combines deep legal expertise with a genuine commitment to our clients' well-being.</p>
+  <div class="page-hero">
+    <h1>About Chigbu Law</h1>
+    <p>Elk Grove's trusted legal advocates — compassionate, experienced, dedicated.</p>
+  </div>
 
-    <div class="about-highlight">
+  <div class="about-page-body">
+
+    <div class="pull-quote">
       <p>"Chigbu Law: Your family, your future, our focus."</p>
     </div>
 
     <h2>Your Elk Grove Attorney</h2>
     <p>Clifford Chigbu, the founder of Chigbu Law, is not only an experienced attorney but also an immigrant himself. He understands the unique challenges faced by our diverse community and uses his in-depth knowledge of local laws and courts to craft personalized legal strategies for each client.</p>
-    <p>Having navigated the complexities of the immigration system firsthand, Clifford brings unique insight and empathy to every case. His personal journey fuels his commitment to achieving positive outcomes for clients facing all types of legal challenges.</p>
+    <p>Having navigated the complexities of the immigration system firsthand, Clifford brings unique insight and empathy to every case. His personal journey fuels his commitment to achieving positive outcomes for clients facing all types of legal challenges — from family law to business disputes.</p>
 
-    <h2>Our Practice Areas</h2>
-    <p>We offer comprehensive legal services across Family Law, Immigration Law, Business Law, Bankruptcy Law, Auto Accident Law, and Personal Injury Law. Our client-focused approach ensures clear communication and tailored strategies to protect your rights and achieve the best outcomes.</p>
+    <h2>Our Commitment</h2>
+    <p>At Clifford Chigbu Attorney at Law, we are dedicated to providing expert legal representation to individuals and families throughout Elk Grove and the greater Sacramento area. Our firm combines deep legal expertise with a genuine commitment to our clients' well-being.</p>
+    <p>We believe that every client deserves clear communication, honest counsel, and aggressive advocacy. Whether you're facing a divorce, navigating immigration, starting a business, or recovering from an accident — we are in your corner.</p>
 
-    <h2>Bar Information</h2>
-    <p><strong>Clifford C Chigbu</strong><br>State Bar of California #221386<br>License Status: Active</p>
-    <p>4815 Laguna Park Drive, Elk Grove, CA 95758<br>Phone: <a href="tel:9162306381" style="color:var(--navy);">916-230-6381</a><br>Email: <a href="mailto:chigbulaw@sbcglobal.net" style="color:var(--navy);">chigbulaw@sbcglobal.net</a></p>
+    <h2>Practice Areas</h2>
+    <p>We offer comprehensive legal services across Family Law, Immigration Law, Business Law, Bankruptcy Law, Auto Accident Law, Personal Injury Law, and Estate Planning. Our client-focused approach ensures tailored strategies to protect your rights and achieve the best outcomes.</p>
+
+    <div class="credentials-box">
+      <h3>Attorney Credentials</h3>
+      <p><strong>Clifford C Chigbu</strong></p>
+      <p>State Bar of California #221386</p>
+      <p>License Status: <span class="status-active">Active</span></p>
+      <p>Office: 4815 Laguna Park Drive, Elk Grove, CA 95758</p>
+      <p>Phone: <a href="tel:9162306381">916-230-6381</a></p>
+      <p>Email: <a href="mailto:chigbulaw@sbcglobal.net">chigbulaw@sbcglobal.net</a></p>
+      <p><a href="https://apps.calbar.ca.gov/attorney/Licensee/Detail/221386" target="_blank" rel="noopener">Verify license on California State Bar →</a></p>
+    </div>
+
+    <div style="margin-top:40px; text-align:center;">
+      <a href="contact.html" class="btn-primary-lg">Schedule a Consultation</a>
+    </div>
+
   </div>
 
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-bottom" style="border-top:none; padding-top:0;">
         <p>© 2025 Clifford Chigbu Attorney at Law. All rights reserved.</p>
+        <p>Phone: <a href="tel:9162306381" style="color:rgba(255,255,255,.5)">916-230-6381</a> &nbsp;·&nbsp; Email: <a href="mailto:chigbulaw@sbcglobal.net" style="color:rgba(255,255,255,.5)">chigbulaw@sbcglobal.net</a></p>
       </div>
     </div>
   </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>

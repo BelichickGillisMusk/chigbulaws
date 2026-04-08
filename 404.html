@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found – Chigbu Law</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .error-page {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px var(--px);
+      background: var(--cream);
+    }
+    .error-inner { max-width: 560px; }
+    .error-code {
+      font-family: var(--serif);
+      font-size: clamp(80px, 15vw, 140px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      opacity: .12;
+      margin-bottom: -20px;
+    }
+    .error-title {
+      font-family: var(--serif);
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--navy-deep);
+      margin-bottom: 16px;
+    }
+    .error-body {
+      font-size: 16px;
+      color: var(--text-700);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .error-links {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .error-link-secondary {
+      padding: 12px 24px;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+      border-radius: var(--r-sm);
+      font-size: 14px;
+      font-weight: 600;
+      transition: background var(--t-fast), color var(--t-fast);
+    }
+    .error-link-secondary:hover { background: var(--navy); color: #fff; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <svg class="logo-scales" width="42" height="42" viewBox="0 0 42 42" fill="none">
+          <circle cx="21" cy="21" r="20" stroke="#1a2744" stroke-width="1.5"/>
+          <line x1="21" y1="8" x2="21" y2="34" stroke="#1a2744" stroke-width="1.5"/>
+          <line x1="10" y1="14" x2="32" y2="14" stroke="#1a2744" stroke-width="1.5"/>
+          <path d="M10 14 L7 21 Q10 25 13 21 L10 14Z" fill="#1a2744" opacity="0.15" stroke="#1a2744" stroke-width="1"/>
+          <path d="M32 14 L29 21 Q32 25 35 21 L32 14Z" fill="#1a2744" opacity="0.15" stroke="#1a2744" stroke-width="1"/>
+          <line x1="16" y1="34" x2="26" y2="34" stroke="#1a2744" stroke-width="1.5"/>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">CLIFFORD CHIGBU</span>
+          <span class="logo-tagline">ATTORNEY AT LAW &nbsp;·&nbsp; chigbulaws.com</span>
+        </div>
+      </a>
+      <a href="/contact.html" class="btn-appt">Make an Appointment</a>
+    </div>
+  </header>
+
+  <div class="error-page">
+    <div class="error-inner">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-body">
+        The page you're looking for may have moved when we migrated from Squarespace.
+        Don't worry — everything is still here, just at a new address.
+      </p>
+      <div class="error-links">
+        <a href="/" class="btn-primary-lg">Go to Homepage</a>
+        <a href="/contact.html" class="error-link-secondary">Contact Clifford</a>
+      </div>
+      <p style="margin-top:28px; font-size:14px; color:var(--text-500);">
+        Need immediate help? Call <a href="tel:9162306381" style="color:var(--navy); font-weight:600;">916-230-6381</a>
+      </p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>© 2025 Clifford Chigbu Attorney at Law. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+</body>
+</html>

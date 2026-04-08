@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://chigbulaws.com/sitemap.xml
+
+# Disallow admin/system paths (none on this static site, but good practice)
+Disallow: /_redirects
+Disallow: /wrangler.toml

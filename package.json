@@ -1,0 +1,11 @@
+{
+  "name": "chigbulaws",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler pages deploy . --project-name=chigbulaws",
+    "dev": "wrangler pages dev . --project-name=chigbulaws"
+  },
+  "devDependencies": {
+    "wrangler": "^3.114.0"
+  }
+}

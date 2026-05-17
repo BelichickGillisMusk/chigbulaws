@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="64" fill="#1a2744"/>
+  <g stroke="#f3d488" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="256" cy="232" r="160"/>
+    <line x1="256" y1="100" x2="256" y2="372"/>
+    <line x1="140" y1="160" x2="372" y2="160"/>
+    <path d="M140 160 L100 232 Q140 270 180 232 Z" fill="#f3d488" fill-opacity=".25"/>
+    <path d="M372 160 L332 232 Q372 270 412 232 Z" fill="#f3d488" fill-opacity=".25"/>
+    <line x1="200" y1="372" x2="312" y2="372"/>
+  </g>
+  <text x="256" y="450" font-family="Georgia, 'Playfair Display', serif" font-size="44" font-weight="600" fill="#f3d488" text-anchor="middle" letter-spacing="2">CHIGBU LAW</text>
+</svg>

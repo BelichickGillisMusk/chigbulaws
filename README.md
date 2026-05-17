@@ -4,7 +4,8 @@ Law firm website for Chigbu Law, deployed on Cloudflare Pages.
 
 ## Deployment
 
-This site is automatically deployed to Cloudflare Pages when changes are pushed to the `main` branch.
+This site is automatically deployed to Cloudflare Pages on every push to `master` (and `main`, if used).
+Pull requests publish to a unique preview URL via the same workflow.
 
 ### Setup Instructions
 
@@ -65,6 +66,26 @@ npx http-server
 - `_redirects` - Cloudflare Pages redirects (301s from old Squarespace URLs)
 - `sitemap.xml` - SEO sitemap
 - `robots.txt` - Search engine crawler instructions
+- `favicon.svg`, `logo.svg`, `og-image.svg` - Brand assets used by browsers, Google Knowledge Panel, and social previews
+
+## Google Search Console verification
+
+`index.html` includes a commented-out `google-site-verification` meta tag. After you
+register the property in Search Console, copy the token from the HTML-tag verification
+method and paste it into the `content=""` value, then re-deploy.
+
+## Google Business Profile
+
+The site is configured to support the GBP listing:
+- LocalBusiness / LegalService JSON-LD with NAP, hours, geo, and `sameAs` to the State Bar listing.
+- `logo.svg` is referenced for the Knowledge Panel.
+- `_redirects` preserves all 301s from the old Squarespace URLs that the GBP listing or backlinks may still point to.
+
+Keep the NAP **exactly** consistent everywhere (`4815 Laguna Park Drive, Elk Grove, CA 95758` / `916-230-6381`):
+- The GBP listing
+- `index.html` JSON-LD
+- `about.html` and `contact.html`
+- The site footer
 
 ## Features
 

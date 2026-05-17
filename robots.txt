@@ -1,9 +1,36 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://chigbulaws.com/sitemap.xml
 
-# Disallow admin/system paths (none on this static site, but good practice)
+# Block admin / system / build paths
 Disallow: /_redirects
 Disallow: /wrangler.toml
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.github/
+Disallow: /node_modules/
+
+# Allow image and SVG assets explicitly (CDN / preview crawlers)
+Allow: /favicon.svg
+Allow: /logo.svg
+Allow: /og-image.svg
+
+# Disallow AI training crawlers (preserve content rights)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /

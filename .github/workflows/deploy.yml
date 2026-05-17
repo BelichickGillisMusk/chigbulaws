@@ -27,3 +27,4 @@ jobs:
           directory: .
           # Optional: Use Wrangler version
           wranglerVersion: '3'
+token in https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions

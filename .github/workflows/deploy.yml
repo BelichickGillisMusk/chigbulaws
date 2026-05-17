@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - claude/deploy-chigbulaws-site
   workflow_dispatch:
 
 jobs:

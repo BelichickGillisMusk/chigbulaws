@@ -75,3 +75,28 @@ npx http-server
 - Responsive design
 - Facebook integration
 - FAQ schema for rich snippets
+
+## Troubleshooting: Error 1000 (DNS points to prohibited IP)
+
+This error means DNS for `chigbulaws.com` points at an IP Cloudflare will not use as an origin—most often a **Cloudflare anycast IP** (from [cloudflare.com/ips](https://www.cloudflare.com/ips/)), an old **Squarespace** host with the orange cloud on, or a **double proxy** (CNAME to another CDN that sends traffic back through Cloudflare).
+
+### Fix (about 5 minutes in the dashboard)
+
+1. **Workers & Pages** → project **chigbulaws** → **Custom domains** → **Set up a domain** → enter `chigbulaws.com` (and `www.chigbulaws.com` if you use www). Wait until status is **Active**. Cloudflare will create the correct DNS records for Pages.
+
+2. **DNS** → **Records** for `chigbulaws.com`. **Delete** any conflicting records:
+   - **A** / **AAAA** on `@` or `www` pointing to Cloudflare IPs (`104.x`, `172.x`, etc.) or to old Squarespace IPs
+   - **CNAME** `www` → `ext-cust.squarespace.com` (or similar) while proxied
+   - Duplicate `@` / `www` records left over from the Squarespace migration
+
+3. **Correct records** (after Pages adds the domain) should look like:
+   - **CNAME** `@` → `chigbulaws.pages.dev` — **Proxied** (orange cloud)
+   - **CNAME** `www` → `chigbulaws.pages.dev` — **Proxied**, *or* remove `www` and use a **Redirect Rule**: `www.chigbulaws.com` → `https://chigbulaws.com`
+
+   Cloudflare Pages does **not** use a manual **A** record to an IP. Do not paste Cloudflare IP addresses into an A record.
+
+4. Confirm **Deployments** shows a successful production build. Open `https://chigbulaws.pages.dev` — if that works but the custom domain does not, the problem is only DNS.
+
+5. Optional: **SSL/TLS** → **Full (strict)** is fine for Pages.
+
+Reference: [Cloudflare Error 1000](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1000/), [Pages custom domains](https://developers.cloudflare.com/pages/configuration/custom-domains/).

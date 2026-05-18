@@ -2,9 +2,29 @@
 
 Law firm website for Chigbu Law, deployed on Cloudflare Pages.
 
+## Go live today (Error 1000 + deploy)
+
+**Blockers we found:** GitHub Actions had no `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` secrets; workflow only ran on `main` while this repo uses `master`; `chigbulaws.com` must be in the **same** Cloudflare account as the API token (the Silverback token in this environment only has `mobilecarbsmoketest.com`, not chigbulaws).
+
+1. **Cloudflare account that owns `chigbulaws.com`** → create API token: **Pages Edit** + **DNS Edit** for that zone.
+2. **GitHub** → repo **Settings → Secrets** → add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (from Workers & Pages overview).
+3. **DNS** (fixes Error 1000): delete **A** records on `@` / `www` pointing at Cloudflare or Squarespace IPs; use **CNAME** `@` and `www` → `chigbulaws.pages.dev` (**Proxied**). Or run (with the correct token):
+
+   ```bash
+   export CLOUDFLARE_API_TOKEN='...'
+   export CLOUDFLARE_ACCOUNT_ID='...'
+   chmod +x scripts/cloudflare-go-live.sh
+   ./scripts/cloudflare-go-live.sh
+   ```
+
+4. **Pages** → project `chigbulaws` → **Custom domains** → add `chigbulaws.com` until **Active**.
+5. Push to `master` or **Actions → Deploy to Cloudflare Pages → Run workflow**.
+
+**Squarespace export:** put files under `squarespace-export/` (or push from GitHub user `sschigbu` when the repo is up).
+
 ## Deployment
 
-This site is automatically deployed to Cloudflare Pages when changes are pushed to the `main` branch.
+This site is automatically deployed to Cloudflare Pages when changes are pushed to the `master` branch.
 
 ### Setup Instructions
 

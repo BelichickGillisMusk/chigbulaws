@@ -1,5 +1,11 @@
-name = "chigbulaws"
-compatibility_date = "2024-01-01"
+name = "silverback-google"
+main = "src/index.ts"
+compatibility_date = "2026-05-17"
+compatibility_flags = ["nodejs_compat"]
 
-# Cloudflare Pages configuration
-pages_build_output_dir = "."
+# Routes for *.chigbulaws.com are typically set in the Cloudflare dashboard.
+# Do not remove existing route patterns when deploying; this file only updates Worker code + R2.
+
+[[r2_buckets]]
+binding = "CHIGBULAW"
+bucket_name = "chigbulaw"

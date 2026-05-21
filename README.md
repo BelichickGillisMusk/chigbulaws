@@ -1,6 +1,39 @@
 # Chigbu Law Website
 
-Law firm website for Chigbu Law, deployed on Cloudflare Pages.
+Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudflare Worker **`silverback-google`** from R2 bucket **`chigbulaw`** (binding `CHIGBULAW`).
+
+## Production architecture
+
+| Piece | Name |
+|-------|------|
+| Worker | `silverback-google` |
+| R2 binding | `CHIGBULAW` → bucket `chigbulaw` |
+| Static files | HTML/CSS/JS at repo root → synced to R2 |
+| Routes | `*.chigbulaws.com` (configure in Cloudflare dashboard; not overwritten by deploy) |
+
+### Deploy (zero-downtime order)
+
+1. **`npm run sync:r2`** — uploads/updates objects in R2 (live Worker keeps serving until each key is replaced).
+2. **`npm run deploy`** — sync + `wrangler deploy` (updates Worker script only).
+
+```bash
+export CLOUDFLARE_API_TOKEN='...'
+export CLOUDFLARE_ACCOUNT_ID='...'
+npm ci
+npm run deploy
+```
+
+### GitHub CI/CD
+
+Workflow: **`.github/workflows/deploy-worker.yml`** on push to `master`.
+
+Secrets required: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (token needs **Workers Scripts Edit** + **R2 Object Read/Write**).
+
+Connect in Cloudflare: **Workers & Pages** → **silverback-google** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
+
+Redirects from `_redirects` are applied by the Worker (loaded from R2).
+
+---
 
 ## Go live today (Error 1000 + deploy)
 
@@ -22,13 +55,11 @@ Law firm website for Chigbu Law, deployed on Cloudflare Pages.
 
 **Squarespace export:** put files under `squarespace-export/` (or push from GitHub user `sschigbu` when the repo is up).
 
-## Deployment
+## Deployment (legacy Pages)
 
-This site is automatically deployed to Cloudflare Pages when changes are pushed to the `master` branch.
+Cloudflare **Pages** is no longer the primary host. Use the Worker workflow above. The old Pages workflow is manual-only (`deploy-cloudflare.yml`).
 
-### Setup Instructions
-
-To connect this repository to Cloudflare Pages:
+### Setup Instructions (GitHub Actions)
 
 1. **Get your Cloudflare credentials:**
    - Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/)

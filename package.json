@@ -1,6 +1,9 @@
 {
   "name": "chigbulaws",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "sync:r2": "node scripts/sync-r2.mjs",
     "sync:r2:minimal": "node scripts/sync-r2.mjs --minimal",

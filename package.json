@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "sync:r2": "node scripts/sync-r2.mjs",
+    "sync:r2:minimal": "node scripts/sync-r2.mjs --minimal",
     "deploy": "npm run sync:r2 && wrangler deploy",
     "deploy:worker": "npm run deploy",
     "dev": "wrangler dev",

@@ -100,12 +100,32 @@ function put(key, filePath) {
   execFileSync(bin, args, { cwd: ROOT, stdio: "inherit", env: process.env });
 }
 
-const files = walk(ROOT);
+const MINIMAL_FILES = [
+  "index.html",
+  "404.html",
+  "_redirects",
+  "style.css",
+  "forms.css",
+  "main.js",
+  "forms.js",
+  "og-image.svg",
+];
+
+const minimal = process.argv.includes("--minimal") || process.env.SYNC_MINIMAL === "1";
+const files = minimal ? MINIMAL_FILES.filter((f) => fs.existsSync(path.join(ROOT, f))) : walk(ROOT);
+
+if (minimal) {
+  console.log(`Minimal upload (homepage + assets only, ${files.length} files)`);
+}
 console.log(`Uploading ${files.length} objects to r2://${BUCKET}/ ...`);
 
 for (const rel of files.sort()) {
   const key = rel.replace(/\\/g, "/");
   put(key, path.join(ROOT, rel));
+}
+
+if (minimal) {
+  console.log("Note: Service/blog links on the homepage will 404 until you run a full sync (npm run sync:r2).");
 }
 
 console.log("R2 sync complete.");

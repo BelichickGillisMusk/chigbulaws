@@ -11,10 +11,15 @@ Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudfla
 | Static files | HTML/CSS/JS at repo root → synced to R2 |
 | Routes | `*.chigbulaws.com` (configure in Cloudflare dashboard; not overwritten by deploy) |
 
+### Which site content is uploaded?
+
+**The new static site** built in this repo (`index.html`, service pages, `blog/`, etc.) — **not** the old Squarespace XML in `squarespace-export/` (that file is empty and is skipped on upload).
+
 ### Deploy (zero-downtime order)
 
-1. **`npm run sync:r2`** — uploads/updates objects in R2 (live Worker keeps serving until each key is replaced).
-2. **`npm run deploy`** — sync + `wrangler deploy` (updates Worker script only).
+1. **`npm run sync:r2`** — uploads the full new site to R2 (live Worker keeps serving until each key is replaced).
+2. **`npm run sync:r2:minimal`** — homepage only: `index.html` + CSS/JS + `404.html` (use if you want something live fast; other nav links 404 until full sync).
+3. **`npm run deploy`** — sync + `wrangler deploy` (updates Worker script only).
 
 ```bash
 export CLOUDFLARE_API_TOKEN='...'

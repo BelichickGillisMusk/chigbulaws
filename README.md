@@ -38,6 +38,28 @@ Connect in Cloudflare: **Workers & Pages** → **silverback-google** → **Setti
 
 Redirects from `_redirects` are applied by the Worker (loaded from R2).
 
+### R2 public development URL
+
+Bucket **`chigbulaw`** can expose a Cloudflare-managed **`r2.dev`** URL (non-production preview only):
+
+**https://pub-24d24f9a69cf4abb888e24096291e3a2.r2.dev**
+
+| Check | Expected |
+|-------|----------|
+| Public access enabled | R2 dashboard → bucket → **Public Development URL** → Allowed |
+| Objects uploaded | `npm run sync:r2` (same keys as the Worker: `index.html`, `about.html`, …) |
+| Homepage | Open **`/index.html`** — `r2.dev` does not apply `_redirects` or map `/` to `index.html` |
+| Production | Use Worker **`silverback-google`** + **`chigbulaws.com`**, not `r2.dev` |
+
+Verify after sync:
+
+```bash
+npm run verify:r2-public
+# or: R2_PUBLIC_URL=https://pub-....r2.dev npm run verify:r2-public
+```
+
+If every path returns **404**, the bucket is empty or sync ran against a different account. Use an API token with **R2 Object Read/Write** on the account that owns `chigbulaw`.
+
 ---
 
 ## Go live today (Error 1000 + deploy)

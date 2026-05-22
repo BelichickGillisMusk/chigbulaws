@@ -1,0 +1,20 @@
+{
+  "name": "chigbulaws",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "sync:r2": "node scripts/sync-r2.mjs",
+    "sync:r2:minimal": "node scripts/sync-r2.mjs --minimal",
+    "deploy": "npm run sync:r2 && wrangler deploy",
+    "deploy:worker": "npm run deploy",
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250525.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.14.0"
+  }
+}

@@ -46,8 +46,10 @@
 /testimonials                                           /#testimonials  301
 /reviews                                                /#testimonials  301
 
-# ── WWW → APEX (Cloudflare handles this but belt+suspenders) ──────
-https://www.chigbulaws.com/*                            https://chigbulaws.com/:splat  301
+# ── WWW → APEX ────────────────────────────────────────────────────
+# _redirects sources must be paths only (not full URLs). Point www and apex
+# at the same Pages project, then add a single Redirect Rule or Bulk Redirect
+# in Cloudflare: hostname eq www.chigbulaws.com → redirect to https://chigbulaws.com
 
 # ── 404 FALLBACK ──────────────────────────────────────────────────
 /*                                                      /404.html  404

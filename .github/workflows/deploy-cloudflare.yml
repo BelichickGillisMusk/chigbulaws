@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
-# Pages deploy disabled — production uses Worker silverback-google + R2 (see deploy-worker.yml).
+# Pages fallback when Worker deploy is unavailable (see deploy-worker.yml for production).
 
 jobs:
   deploy:

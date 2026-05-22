@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-      - claude/deploy-chigbulaws-site
+      - master
   workflow_dispatch:
+# Prefer deploy-worker.yml (Worker + R2). This workflow is a Pages fallback only.
 
 jobs:
   deploy:
@@ -25,6 +26,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: chigbulaws
           directory: .
-          # Optional: Use Wrangler version
-          wranglerVersion: '3'
-token in https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions
+          wranglerVersion: "3"
+# Add CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID at:
+# https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions

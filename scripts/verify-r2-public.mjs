@@ -3,6 +3,20 @@
  * Check that the R2 public development URL serves synced static files.
  * Usage: node scripts/verify-r2-public.mjs [baseUrl]
  */
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+function accountIdFromWrangler() {
+  const toml = fs.readFileSync(path.join(ROOT, "wrangler.toml"), "utf8");
+  const match = toml.match(/^\s*account_id\s*=\s*"([^"]+)"/m);
+  return match?.[1] ?? null;
+}
+
+const ACCOUNT_ID = accountIdFromWrangler() || "1FDNF6DC9MDF04634";
+
 const BASE =
   process.argv[2]?.replace(/\/$/, "") ||
   process.env.R2_PUBLIC_URL ||
@@ -43,7 +57,10 @@ console.log(`Root "/" HEAD: ${root.status}`);
 
 if (failed > 0) {
   console.log(
-    "\nFix: run npm run sync:r2 with CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID for the account that owns bucket chigbulaw.",
+    "\nFix: upload objects to bucket chigbulaw, then re-run this script:\n" +
+      `  export CLOUDFLARE_ACCOUNT_ID='${ACCOUNT_ID}'\n` +
+      "  export CLOUDFLARE_API_TOKEN='...'\n" +
+      "  npm run sync:r2",
   );
   process.exit(1);
 }

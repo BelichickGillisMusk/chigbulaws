@@ -7,8 +7,8 @@ Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudfla
 | Piece | Name |
 |-------|------|
 | Worker | `chigbulaws` |
-| Account ID | `bafa242dd95d3fdce72540d20accd0a2` |
-| R2 bucket | `chigbulaw` ([R2 catalog](https://catalog.cloudflarestorage.com/bafa242dd95d3fdce72540d20accd0a2/chigbulaw)) |
+| Account ID | `1FDNF6DC9MDF04634` |
+| R2 bucket | `chigbulaw` ([R2 catalog](https://catalog.cloudflarestorage.com/1FDNF6DC9MDF04634/chigbulaw)) |
 | R2 binding | `CHIGBULAW` → bucket `chigbulaw` |
 | Static files | HTML/CSS/JS at repo root → synced to R2 |
 | Custom domains | `chigbulaws.com`, `www.chigbulaws.com` (in `wrangler.toml`; zone must be in account) |
@@ -77,7 +77,7 @@ Full checklist: **[GO-LIVE.md](GO-LIVE.md)**.
 
    ```bash
    export CLOUDFLARE_API_TOKEN='...'
-   export CLOUDFLARE_ACCOUNT_ID='bafa242dd95d3fdce72540d20accd0a2'
+   export CLOUDFLARE_ACCOUNT_ID='1FDNF6DC9MDF04634'
    npm ci && npm run deploy
    ```
 

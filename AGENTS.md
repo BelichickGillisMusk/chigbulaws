@@ -2,7 +2,7 @@
 
 ## Cursor Cloud specific instructions
 
-This is a static law firm website served by the Cloudflare Worker **`chigbulaws`**, which reads assets from R2 bucket **`chigbulaw`** (catalog: `https://catalog.cloudflarestorage.com/bafa242dd95d3fdce72540d20accd0a2/chigbulaw`). There is no database, no backend API, and no build step for the frontend (vanilla HTML/CSS/JS).
+This is a static law firm website served by the Cloudflare Worker **`chigbulaws`**, which reads assets from R2 bucket **`chigbulaw`** (catalog: `https://catalog.cloudflarestorage.com/1FDNF6DC9MDF04634/chigbulaw`). There is no database, no backend API, and no build step for the frontend (vanilla HTML/CSS/JS).
 
 ### Services
 

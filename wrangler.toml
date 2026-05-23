@@ -1,4 +1,5 @@
-name = "silverback-google"
+name = "chigbulaws"
+account_id = "bafa242dd95d3fdce72540d20accd0a2"
 main = "src/index.ts"
 compatibility_date = "2026-05-17"
 compatibility_flags = ["nodejs_compat"]

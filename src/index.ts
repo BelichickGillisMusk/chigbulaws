@@ -1,5 +1,5 @@
 /**
- * silverback-google — serve chigbulaws.com static site from R2 (CHIGBULAW → chigbulaw).
+ * chigbulaws — serve chigbulaws.com static site from R2 (CHIGBULAW → bucket chigbulaw).
  */
 
 export interface Env {

@@ -1,6 +1,8 @@
-# Cloudflare Pages Deployment Guide
+# Cloudflare deployment guide
 
-This site is configured to deploy to Cloudflare Pages, replacing the previous $50/month hosting.
+**Production:** Worker **`chigbulaws`** + R2 **`chigbulaw`**. See **[GO-LIVE.md](GO-LIVE.md)** for DNS and Error 1000.
+
+The sections below describe **legacy Cloudflare Pages** only.
 
 ## Automatic Deployment (Recommended)
 

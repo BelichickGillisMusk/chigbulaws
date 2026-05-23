@@ -2,7 +2,7 @@
   "name": "chigbulaws",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "scripts": {
     "sync:r2": "node scripts/sync-r2.mjs",
@@ -17,6 +17,6 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250525.0",
     "typescript": "^5.8.3",
-    "wrangler": "^4.14.0"
+    "wrangler": "~4.86.0"
   }
 }

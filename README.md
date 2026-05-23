@@ -7,8 +7,8 @@ Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudfla
 | Piece | Name |
 |-------|------|
 | Worker | `chigbulaws` |
-| Account ID | `1FDNF6DC9MDF04634` |
-| R2 bucket | `chigbulaw` ([R2 catalog](https://catalog.cloudflarestorage.com/1FDNF6DC9MDF04634/chigbulaw)) |
+| Account ID | `bafa242dd95d3fdce72540d20accd0a2` |
+| R2 bucket | `chigbulaw` ([R2 catalog](https://catalog.cloudflarestorage.com/bafa242dd95d3fdce72540d20accd0a2/chigbulaw)) |
 | R2 binding | `CHIGBULAW` → bucket `chigbulaw` |
 | Static files | HTML/CSS/JS at repo root → synced to R2 |
 | Custom domains | `chigbulaws.com`, `www.chigbulaws.com` (in `wrangler.toml`; zone must be in account) |
@@ -34,16 +34,25 @@ npm run deploy
 
 Workflow: **`.github/workflows/deploy-worker.yml`** on push to `master`.
 
-Add repository secrets at **[Settings → Secrets and variables → Actions](https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions)**:
+**Organization (recommended)** — use the Cloudflare token from your secure environment:
 
-| Secret | Value |
-|--------|--------|
-| `CLOUDFLARE_API_TOKEN` | API token for the account that owns `chigbulaw` and `chigbulaws.com` |
-| `CLOUDFLARE_ACCOUNT_ID` | Account ID from **Workers & Pages** overview (32-character hex; must match `wrangler.toml`) |
+| Where | Name | Value |
+|-------|------|--------|
+| [Org secret](https://github.com/organizations/BelichickGillisMusk/settings/secrets/actions) | `CLOUDFLARE_API_TOKEN` | Cloudflare API token |
+| [Org variable](https://github.com/organizations/BelichickGillisMusk/settings/variables/actions) | `CLOUDFLARE_ACCOUNT_ID` | `bafa242dd95d3fdce72540d20accd0a2` (or your account ID from Workers & Pages) |
+
+Automate from a machine with `gh` admin access:
+
+```bash
+chmod +x scripts/set-github-cloudflare-secrets.sh
+./scripts/set-github-cloudflare-secrets.sh
+```
+
+**Repository fallback:** [repo secrets](https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions) for both names if org settings are not available.
 
 Token permissions: **Workers Scripts Edit**, **R2 Object Read/Write**, and **Zone DNS Edit** if you use `scripts/cloudflare-go-live.sh`.
 
-After saving secrets, run **Actions → Deploy chigbulaws Worker → Run workflow**, or push to `master`.
+After saving, run **Actions → Deploy chigbulaws Worker → Run workflow**, or push to `master`.
 
 Connect in Cloudflare: **Workers & Pages** → **chigbulaws** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
 
@@ -86,7 +95,7 @@ Full checklist: **[GO-LIVE.md](GO-LIVE.md)**.
 
    ```bash
    export CLOUDFLARE_API_TOKEN='...'
-   export CLOUDFLARE_ACCOUNT_ID='1FDNF6DC9MDF04634'
+   export CLOUDFLARE_ACCOUNT_ID='bafa242dd95d3fdce72540d20accd0a2'
    npm ci && npm run deploy
    ```
 

@@ -15,7 +15,7 @@ function accountIdFromWrangler() {
   return match?.[1] ?? null;
 }
 
-const ACCOUNT_ID = accountIdFromWrangler() || "1FDNF6DC9MDF04634";
+const ACCOUNT_ID = accountIdFromWrangler() || "bafa242dd95d3fdce72540d20accd0a2";
 
 const BASE =
   process.argv[2]?.replace(/\/$/, "") ||

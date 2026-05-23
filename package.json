@@ -11,7 +11,8 @@
     "deploy:worker": "npm run deploy",
     "dev": "wrangler dev",
     "typecheck": "tsc --noEmit",
-    "verify:r2-public": "node scripts/verify-r2-public.mjs"
+    "verify:r2-public": "node scripts/verify-r2-public.mjs",
+    "github:cloudflare-secrets": "bash scripts/set-github-cloudflare-secrets.sh"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250525.0",

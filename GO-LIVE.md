@@ -4,7 +4,7 @@ Production uses the **`chigbulaws`** Worker and R2 bucket **`chigbulaw`**, not C
 
 ## Prerequisites
 
-1. **`chigbulaws.com` zone** is in the **same** Cloudflare account as `CLOUDFLARE_ACCOUNT_ID` (`1FDNF6DC9MDF04634` in `wrangler.toml`).  
+1. **`chigbulaws.com` zone** is in the **same** Cloudflare account as `CLOUDFLARE_ACCOUNT_ID` (`bafa242dd95d3fdce72540d20accd0a2` in `wrangler.toml`).  
    If the zone is only on another account, either transfer it or use that account’s API token.
 2. API token permissions: **Workers Scripts Edit**, **R2 Object Read/Write**, **Zone DNS Edit** (for automated DNS cleanup).
 3. GitHub secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
@@ -23,7 +23,7 @@ Or deploy from this repo (creates the same custom domains if the zone is in the 
 
 ```bash
 export CLOUDFLARE_API_TOKEN='...'
-export CLOUDFLARE_ACCOUNT_ID='1FDNF6DC9MDF04634'
+export CLOUDFLARE_ACCOUNT_ID='bafa242dd95d3fdce72540d20accd0a2'
 npm ci
 npm run deploy
 ```
@@ -60,7 +60,7 @@ When the zone is in your account and the token has **DNS Edit**:
 
 ```bash
 export CLOUDFLARE_API_TOKEN='...'
-export CLOUDFLARE_ACCOUNT_ID='1FDNF6DC9MDF04634'
+export CLOUDFLARE_ACCOUNT_ID='bafa242dd95d3fdce72540d20accd0a2'
 ./scripts/cloudflare-go-live.sh
 ```
 

@@ -24,7 +24,11 @@ for f in index.html 404.html style.css forms.css main.js forms.js _redirects abo
     --content-type "$(case "${f##*.}" in html) echo 'text/html; charset=utf-8';; css) echo 'text/css; charset=utf-8';; js) echo 'application/javascript; charset=utf-8';; xml) echo 'application/xml; charset=utf-8';; txt) echo 'text/plain; charset=utf-8';; svg) echo 'image/svg+xml';; *) echo 'application/octet-stream';; esac)" \
     --local
 done
-# Also upload blog/*.html files similarly
+# Upload blog posts
+for f in blog/*.html; do
+  [ -f "$f" ] && npx wrangler r2 object put "chigbulaw/$f" --file "$f" \
+    --content-type 'text/html; charset=utf-8' --local
+done
 ```
 
 The seeded data persists in `.wrangler/state/` across restarts of `wrangler dev`.

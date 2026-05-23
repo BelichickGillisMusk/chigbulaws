@@ -1,12 +1,14 @@
 # Chigbu Law Website
 
-Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudflare Worker **`silverback-google`** from R2 bucket **`chigbulaw`** (binding `CHIGBULAW`).
+Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudflare Worker **`chigbulaws`** from R2 bucket **`chigbulaw`** (binding `CHIGBULAW`).
 
 ## Production architecture
 
 | Piece | Name |
 |-------|------|
-| Worker | `silverback-google` |
+| Worker | `chigbulaws` |
+| Account ID | `bafa242dd95d3fdce72540d20accd0a2` |
+| R2 bucket | `chigbulaw` ([R2 catalog](https://catalog.cloudflarestorage.com/bafa242dd95d3fdce72540d20accd0a2/chigbulaw)) |
 | R2 binding | `CHIGBULAW` → bucket `chigbulaw` |
 | Static files | HTML/CSS/JS at repo root → synced to R2 |
 | Routes | `*.chigbulaws.com` (configure in Cloudflare dashboard; not overwritten by deploy) |
@@ -34,9 +36,31 @@ Workflow: **`.github/workflows/deploy-worker.yml`** on push to `master`.
 
 Secrets required: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (token needs **Workers Scripts Edit** + **R2 Object Read/Write**).
 
-Connect in Cloudflare: **Workers & Pages** → **silverback-google** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
+Connect in Cloudflare: **Workers & Pages** → **chigbulaws** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
 
 Redirects from `_redirects` are applied by the Worker (loaded from R2).
+
+### R2 public development URL
+
+Bucket **`chigbulaw`** can expose a Cloudflare-managed **`r2.dev`** URL (non-production preview only):
+
+**https://pub-24d24f9a69cf4abb888e24096291e3a2.r2.dev**
+
+| Check | Expected |
+|-------|----------|
+| Public access enabled | R2 dashboard → bucket → **Public Development URL** → Allowed |
+| Objects uploaded | `npm run sync:r2` (same keys as the Worker: `index.html`, `about.html`, …) |
+| Homepage | Open **`/index.html`** — `r2.dev` does not apply `_redirects` or map `/` to `index.html` |
+| Production | Use Worker **`silverback-google`** + **`chigbulaws.com`**, not `r2.dev` |
+
+Verify after sync:
+
+```bash
+npm run verify:r2-public
+# or: R2_PUBLIC_URL=https://pub-....r2.dev npm run verify:r2-public
+```
+
+If every path returns **404**, the bucket is empty or sync ran against a different account. Use an API token with **R2 Object Read/Write** on the account that owns `chigbulaw`.
 
 ---
 

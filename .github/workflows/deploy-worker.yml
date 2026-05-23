@@ -29,7 +29,7 @@ jobs:
       - name: Require Cloudflare secrets
         run: |
           if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] || [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
-            echo "::error::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in GitHub repo Settings → Secrets and variables → Actions."
+            echo "::error::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID at https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions"
             echo "Token needs Workers Scripts Edit and R2 Object Read/Write on the account that owns chigbulaws.com."
             exit 1
           fi

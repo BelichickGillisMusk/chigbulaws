@@ -34,7 +34,16 @@ npm run deploy
 
 Workflow: **`.github/workflows/deploy-worker.yml`** on push to `master`.
 
-Secrets required: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (token needs **Workers Scripts Edit** + **R2 Object Read/Write**).
+Add repository secrets at **[Settings → Secrets and variables → Actions](https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions)**:
+
+| Secret | Value |
+|--------|--------|
+| `CLOUDFLARE_API_TOKEN` | API token for the account that owns `chigbulaw` and `chigbulaws.com` |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID from **Workers & Pages** overview (32-character hex; must match `wrangler.toml`) |
+
+Token permissions: **Workers Scripts Edit**, **R2 Object Read/Write**, and **Zone DNS Edit** if you use `scripts/cloudflare-go-live.sh`.
+
+After saving secrets, run **Actions → Deploy chigbulaws Worker → Run workflow**, or push to `master`.
 
 Connect in Cloudflare: **Workers & Pages** → **chigbulaws** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
 

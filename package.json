@@ -10,7 +10,8 @@
     "deploy": "npm run sync:r2 && wrangler deploy",
     "deploy:worker": "npm run deploy",
     "dev": "wrangler dev",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:r2-public": "node scripts/verify-r2-public.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250525.0",

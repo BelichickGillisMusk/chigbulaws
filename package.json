@@ -2,7 +2,7 @@
   "name": "chigbulaws",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "scripts": {
     "sync:r2": "node scripts/sync-r2.mjs",
@@ -11,11 +11,12 @@
     "deploy:worker": "npm run deploy",
     "dev": "wrangler dev",
     "typecheck": "tsc --noEmit",
-    "verify:r2-public": "node scripts/verify-r2-public.mjs"
+    "verify:r2-public": "node scripts/verify-r2-public.mjs",
+    "github:cloudflare-secrets": "bash scripts/set-github-cloudflare-secrets.sh"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250525.0",
     "typescript": "^5.8.3",
-    "wrangler": "^4.14.0"
+    "wrangler": "~4.86.0"
   }
 }

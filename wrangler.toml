@@ -1,10 +1,19 @@
-name = "silverback-google"
+name = "chigbulaws"
+account_id = "bafa242dd95d3fdce72540d20accd0a2"
 main = "src/index.ts"
 compatibility_date = "2026-05-17"
 compatibility_flags = ["nodejs_compat"]
 
-# Routes for *.chigbulaws.com are typically set in the Cloudflare dashboard.
-# Do not remove existing route patterns when deploying; this file only updates Worker code + R2.
+# Custom domains: wrangler creates DNS + SSL when chigbulaws.com is in this account.
+# Remove conflicting A/AAAA on @ and www before first deploy (see GO-LIVE.md).
+
+[[routes]]
+pattern = "chigbulaws.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.chigbulaws.com"
+custom_domain = true
 
 [[r2_buckets]]
 binding = "CHIGBULAW"

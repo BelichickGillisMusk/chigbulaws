@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
-# Pages fallback when Worker deploy is unavailable (see deploy-worker.yml for production).
+# Pages deploy disabled — production uses Worker chigbulaws + R2 (see deploy-worker.yml).
 
 jobs:
   deploy:

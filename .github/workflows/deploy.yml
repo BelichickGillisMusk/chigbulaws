@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-      - claude/deploy-chigbulaws-site
+      - master
   workflow_dispatch:
+# Prefer deploy-worker.yml (Worker + R2). This workflow is a Pages fallback only.
 
 jobs:
   deploy:

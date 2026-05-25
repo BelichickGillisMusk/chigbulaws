@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "deploy": "wrangler pages deploy . --project-name=chigbulaws",
-    "dev": "wrangler pages dev . --project-name=chigbulaws"
+    "preview": "wrangler pages dev . --project-name=chigbulaws",
+    "dev": "python3 -m http.server 8080"
   },
   "devDependencies": {
-    "wrangler": "^3.114.0"
+    "wrangler": "^3.120.0"
   }
 }

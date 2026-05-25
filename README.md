@@ -2,13 +2,13 @@
 
 Law firm website for Chigbu Law, deployed on Cloudflare Pages.
 
-## Go live today (Error 1000 + deploy)
+## Go Live Checklist
 
-**Blockers we found:** GitHub Actions had no `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` secrets; workflow only ran on `main` while this repo uses `master`; `chigbulaws.com` must be in the **same** Cloudflare account as the API token (the Silverback token in this environment only has `mobilecarbsmoketest.com`, not chigbulaws).
-
-1. **Cloudflare account that owns `chigbulaws.com`** → create API token: **Pages Edit** + **DNS Edit** for that zone.
-2. **GitHub** → repo **Settings → Secrets** → add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (from Workers & Pages overview).
-3. **DNS** (fixes Error 1000): delete **A** records on `@` / `www` pointing at Cloudflare or Squarespace IPs; use **CNAME** `@` and `www` → `chigbulaws.pages.dev` (**Proxied**). Or run (with the correct token):
+1. **Create a Cloudflare API token** in the account that owns `chigbulaws.com` — needs **Cloudflare Pages: Edit** + **DNS: Edit** permissions for that zone.
+2. **Add GitHub Secrets** — repo **Settings → Secrets and variables → Actions**:
+   - `CLOUDFLARE_API_TOKEN` — the token from step 1
+   - `CLOUDFLARE_ACCOUNT_ID` — from the Cloudflare dashboard **Workers & Pages** overview
+3. **DNS** (fixes Error 1000): in Cloudflare DNS, delete any **A** records on `@` / `www` pointing at Cloudflare or Squarespace IPs. Use **CNAME** `@` and `www` → `chigbulaws.pages.dev` (**Proxied**). Or run the go-live script:
 
    ```bash
    export CLOUDFLARE_API_TOKEN='...'
@@ -17,8 +17,8 @@ Law firm website for Chigbu Law, deployed on Cloudflare Pages.
    ./scripts/cloudflare-go-live.sh
    ```
 
-4. **Pages** → project `chigbulaws` → **Custom domains** → add `chigbulaws.com` until **Active**.
-5. Push to `master` or **Actions → Deploy to Cloudflare Pages → Run workflow**.
+4. **Custom domain** — in Cloudflare dashboard: **Workers & Pages** → project `chigbulaws` → **Custom domains** → add `chigbulaws.com` and wait until **Active**.
+5. **Deploy** — push to `master` or `main`, or go to **Actions → Deploy to Cloudflare Pages → Run workflow**.
 
 **Squarespace export:** put files under `squarespace-export/` (or push from GitHub user `sschigbu` when the repo is up).
 
@@ -26,32 +26,13 @@ Law firm website for Chigbu Law, deployed on Cloudflare Pages.
 
 This site is automatically deployed to Cloudflare Pages when changes are pushed to the `master` branch.
 
-### Setup Instructions
+### Manual Deployment
 
-To connect this repository to Cloudflare Pages:
-
-1. **Get your Cloudflare credentials:**
-   - Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Get your Account ID from the Workers & Pages overview
-   - Create an API Token with "Cloudflare Pages - Edit" permissions
-
-2. **Add GitHub Secrets:**
-   - Go to your GitHub repository Settings → Secrets and variables → Actions
-   - Add the following secrets:
-     - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
-     - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-
-3. **Manual Deployment (Alternative):**
-   ```bash
-   # Install Wrangler CLI
-   npm install -g wrangler
-
-   # Login to Cloudflare
-   wrangler login
-
-   # Deploy
-   wrangler pages deploy . --project-name=chigbulaws
-   ```
+```bash
+npm install -g wrangler
+wrangler login
+wrangler pages deploy . --project-name=chigbulaws
+```
 
 ### Local Development
 

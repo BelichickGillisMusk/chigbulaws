@@ -5,18 +5,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "sync:r2": "node scripts/sync-r2.mjs",
-    "sync:r2:minimal": "node scripts/sync-r2.mjs --minimal",
-    "deploy": "npm run sync:r2 && wrangler deploy",
-    "deploy:worker": "npm run deploy",
+    "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "typecheck": "tsc --noEmit",
-    "verify:r2-public": "node scripts/verify-r2-public.mjs",
     "github:cloudflare-secrets": "bash scripts/set-github-cloudflare-secrets.sh"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250525.0",
-    "typescript": "^5.8.3",
     "wrangler": "~4.86.0"
   }
 }

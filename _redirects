@@ -41,10 +41,10 @@
 # ── COMMON TYPOS / VARIANTS ───────────────────────────────────────
 /home                                                   /  301
 /index                                                  /  301
-/services                                               /#services  301
-/legal-services                                         /#services  301
-/testimonials                                           /#testimonials  301
-/reviews                                                /#testimonials  301
+/services                                               /#services-heading  301
+/legal-services                                         /#services-heading  301
+/testimonials                                           /#testimonials-heading  301
+/reviews                                                /#testimonials-heading  301
 
 # ── WWW → APEX ────────────────────────────────────────────────────
 # _redirects sources must be paths only (not full URLs). Point www and apex

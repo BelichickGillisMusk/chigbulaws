@@ -52,4 +52,7 @@
 # in Cloudflare: hostname eq www.chigbulaws.com → redirect to https://chigbulaws.com
 
 # ── 404 FALLBACK ──────────────────────────────────────────────────
-/*                                                      /404.html  404
+# Note: Workers Static Assets handles 404s via not_found_handling = "404-page"
+# in wrangler.toml (serves /404.html automatically). The line below is omitted
+# because Workers does not support status 404 in _redirects.
+# /*                                                    /404.html  404

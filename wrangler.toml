@@ -1,20 +1,21 @@
 name = "chigbulaws"
 account_id = "bafa242dd95d3fdce72540d20accd0a2"
-main = "src/index.ts"
-compatibility_date = "2026-05-17"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2026-05-25"
 
-# Custom domains: wrangler creates DNS + SSL when chigbulaws.com is in this account.
-# Remove conflicting A/AAAA on @ and www before first deploy (see GO-LIVE.md).
+# Serve the static HTML/CSS/JS site directly from Cloudflare's edge.
+# No Worker script or R2 bucket needed — assets are bundled on deploy.
+# The site is live at: https://chigbulaws.workers.dev
+#
+# Custom domain (chigbulaws.com): once the domain is added to this
+# Cloudflare account, add these lines back and re-deploy:
+#   [[routes]]
+#   pattern = "chigbulaws.com"
+#   custom_domain = true
+#
+#   [[routes]]
+#   pattern = "www.chigbulaws.com"
+#   custom_domain = true
 
-[[routes]]
-pattern = "chigbulaws.com"
-custom_domain = true
-
-[[routes]]
-pattern = "www.chigbulaws.com"
-custom_domain = true
-
-[[r2_buckets]]
-binding = "CHIGBULAW"
-bucket_name = "chigbulaw"
+[assets]
+directory = "."
+not_found_handling = "404-page"

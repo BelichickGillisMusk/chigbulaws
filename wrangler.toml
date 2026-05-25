@@ -1,5 +1,7 @@
 name = "chigbulaws"
-compatibility_date = "2024-01-01"
+account_id = "bafa242dd95d3fdce72540d20accd0a2"
+compatibility_date = "2026-05-25"
 
-# Cloudflare Pages configuration
-pages_build_output_dir = "."
+[assets]
+directory = "."
+not_found_handling = "404-page"

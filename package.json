@@ -1,11 +1,14 @@
 {
   "name": "chigbulaws",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "deploy": "wrangler pages deploy . --project-name=chigbulaws",
-    "dev": "wrangler pages dev . --project-name=chigbulaws"
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
   },
   "devDependencies": {
-    "wrangler": "^3.114.0"
+    "wrangler": "~4.86.0"
   }
 }

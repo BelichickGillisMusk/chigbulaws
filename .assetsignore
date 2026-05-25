@@ -1,0 +1,16 @@
+node_modules/
+.git/
+.github/
+.wrangler/
+scripts/
+squarespace-export/
+src/
+vendor/
+wrangler.toml
+package.json
+package-lock.json
+tsconfig.json
+.gitignore
+.assetsignore
+README.md
+GO-LIVE.md

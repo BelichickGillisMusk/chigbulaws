@@ -2,13 +2,25 @@
 
 Law firm website for Chigbu Law, deployed on Cloudflare Pages.
 
-## Go live today (Error 1000 + deploy)
+## Go live today
 
-**Blockers we found:** GitHub Actions had no `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` secrets; workflow only ran on `main` while this repo uses `master`; `chigbulaws.com` must be in the **same** Cloudflare account as the API token (the Silverback token in this environment only has `mobilecarbsmoketest.com`, not chigbulaws).
+The site is a plain static HTML/CSS/JS bundle. The repo is wired up to deploy to Cloudflare Pages (project name `chigbulaws`) via GitHub Actions on every push to `master`. To go live, three things need to be true:
 
-1. **Cloudflare account that owns `chigbulaws.com`** → create API token: **Pages Edit** + **DNS Edit** for that zone.
-2. **GitHub** → repo **Settings → Secrets** → add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (from Workers & Pages overview).
-3. **DNS** (fixes Error 1000): delete **A** records on `@` / `www` pointing at Cloudflare or Squarespace IPs; use **CNAME** `@` and `www` → `chigbulaws.pages.dev` (**Proxied**). Or run (with the correct token):
+1. **GitHub repo secrets exist.** Settings -> Secrets and variables -> Actions:
+   - `CLOUDFLARE_API_TOKEN` — token with **Account: Cloudflare Pages — Edit** scoped to the account that owns `chigbulaws.com`, plus **Zone: DNS — Edit** on `chigbulaws.com` if you want the script in `scripts/cloudflare-go-live.sh` to fix DNS for you. Do not set an IP allowlist on the token.
+   - `CLOUDFLARE_ACCOUNT_ID` — the account ID from Workers & Pages overview.
+2. **A Pages project named `chigbulaws` exists** in that same Cloudflare account (Workers & Pages -> Create -> Pages -> Direct Upload, or the first run of `wrangler pages deploy` will create it).
+3. **DNS is correct** for the custom domain (see Error 1000 section below). The site will publish to `https://chigbulaws.pages.dev` regardless of DNS — that is the easiest first checkpoint.
+
+Then push to `master` (or run **Actions -> Deploy to Cloudflare Pages -> Run workflow**). The workflow has a preflight step that fails with a clear error if either secret is missing.
+
+**Common gotchas seen on this repo:** secrets missing entirely; token scoped to a different Cloudflare account than the one that owns `chigbulaws.com`; old `cloudflare/pages-action@v1` (replaced here with `cloudflare/wrangler-action@v3`).
+
+### Step-by-step
+
+1. **Cloudflare account that owns `chigbulaws.com`** -> create an API token with **Pages Edit** + (optional) **DNS Edit** for the `chigbulaws.com` zone. **Do not** set an IP allowlist on the token; GitHub Actions runners use ephemeral IPs.
+2. **GitHub** -> repo **Settings -> Secrets and variables -> Actions** -> add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (from Workers & Pages overview).
+3. **DNS** (fixes Error 1000): delete **A** records on `@` / `www` pointing at Cloudflare or Squarespace IPs; use **CNAME** `@` and `www` -> `chigbulaws.pages.dev` (**Proxied**). Or run, locally, with the correct token:
 
    ```bash
    export CLOUDFLARE_API_TOKEN='...'
@@ -17,8 +29,8 @@ Law firm website for Chigbu Law, deployed on Cloudflare Pages.
    ./scripts/cloudflare-go-live.sh
    ```
 
-4. **Pages** → project `chigbulaws` → **Custom domains** → add `chigbulaws.com` until **Active**.
-5. Push to `master` or **Actions → Deploy to Cloudflare Pages → Run workflow**.
+4. **Pages** -> project `chigbulaws` -> **Custom domains** -> add `chigbulaws.com` until **Active**.
+5. Push to `master` or **Actions -> Deploy to Cloudflare Pages -> Run workflow**.
 
 **Squarespace export:** put files under `squarespace-export/` (or push from GitHub user `sschigbu` when the repo is up).
 

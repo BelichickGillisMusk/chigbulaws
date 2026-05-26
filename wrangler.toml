@@ -8,13 +8,13 @@ compatibility_date = "2026-05-25"
 #
 # Custom domain (chigbulaws.com): once the domain is added to this
 # Cloudflare account, add these lines back and re-deploy:
-#   [[routes]]
-#   pattern = "chigbulaws.com"
-#   custom_domain = true
-#
-#   [[routes]]
-#   pattern = "www.chigbulaws.com"
-#   custom_domain = true
+[[routes]]
+pattern = "chigbulaws.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.chigbulaws.com"
+custom_domain = true
 
 [assets]
 directory = "."

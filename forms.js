@@ -49,7 +49,6 @@
       try {
         const steps = JSON.parse(container.getAttribute('data-steps'));
         const formId = container.getAttribute('data-form-id') || 'Intake';
-        const formspreeId = container.getAttribute('data-formspree') || '';
         let currentStep = 0;
         let lang = 'en';
         const formData = {};

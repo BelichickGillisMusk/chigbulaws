@@ -310,7 +310,7 @@
       }).catch(function() {
         var body = Object.entries(data)
           .filter(function(kv) { return !kv[0].startsWith('_'); })
-          .map(function(kv) { return kv[0] + ': ' + kv[1]; })
+          .map(function(kv) { return encodeURIComponent(kv[0]) + ': ' + encodeURIComponent(kv[1]); })
           .join('%0A');
         window.open('mailto:chigbulaw@sbcglobal.net?subject=' + encodeURIComponent(data._subject) + '&body=' + body);
         btn.textContent = '✓ Message Sent — We\'ll be in touch soon!';

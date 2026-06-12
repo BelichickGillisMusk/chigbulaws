@@ -1,13 +1,8 @@
 name = "chigbulaws"
 account_id = "bafa242dd95d3fdce72540d20accd0a2"
 compatibility_date = "2026-05-25"
+main = "src/index.ts"
 
-# Serve the static HTML/CSS/JS site directly from Cloudflare's edge.
-# No Worker script or R2 bucket needed — assets are bundled on deploy.
-# The site is live at: https://chigbulaws.workers.dev
-#
-# Custom domain (chigbulaws.com): once the domain is added to this
-# Cloudflare account, add these lines back and re-deploy:
 [[routes]]
 pattern = "chigbulaws.com"
 custom_domain = true
@@ -19,3 +14,4 @@ custom_domain = true
 [assets]
 directory = "."
 not_found_handling = "404-page"
+binding = "ASSETS"

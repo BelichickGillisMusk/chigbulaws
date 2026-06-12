@@ -281,13 +281,42 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="main.js"></script>
   <script>
     function handleFormSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = '✓ Message Sent — We\'ll be in touch soon!';
-      btn.style.background = '#16a34a';
+      var form = e.target;
+      var btn = form.querySelector('.form-submit');
+      var data = {
+        name: form.name.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        matter: form.matter.value,
+        message: form.message.value,
+        _subject: 'New Contact — Chigbu Law — ' + (form.matter.value || 'General Inquiry'),
+        form_type: 'Contact Page'
+      };
+      btn.textContent = 'Sending…';
       btn.disabled = true;
+      fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(r) {
+        if (r.ok) {
+          btn.textContent = '✓ Message Sent — We\'ll be in touch soon!';
+          btn.style.background = '#16a34a';
+        } else { throw new Error('failed'); }
+      }).catch(function() {
+        var body = Object.entries(data)
+          .filter(function(kv) { return !kv[0].startsWith('_'); })
+          .map(function(kv) { return kv[0] + ': ' + kv[1]; })
+          .join('%0A');
+        window.open('mailto:chigbulaw@sbcglobal.net?subject=' + encodeURIComponent(data._subject) + '&body=' + body);
+        btn.textContent = '✓ Message Sent — We\'ll be in touch soon!';
+        btn.style.background = '#16a34a';
+        btn.disabled = true;
+      });
     }
   </script>
 </body>

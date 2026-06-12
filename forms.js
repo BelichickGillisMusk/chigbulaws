@@ -332,24 +332,15 @@
             form_type: formId
           });
 
-          // Try Formspree if configured
-          const endpoint = formspreeId ? 'https://formspree.io/f/' + formspreeId : null;
-
-          if (endpoint) {
-            fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify(payload)
-            }).then(function (r) {
-              if (r.ok) { showSuccess(); }
-              else { showFallback(); }
-            }).catch(function () { showFallback(); });
-          } else {
-            // Fallback: open mailto
-            showFallback();
-          }
+          fetch('/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          }).then(function (r) {
+            if (r.ok) { showSuccess(); }
+            else { showFallback(); }
+          }).catch(function () { showFallback(); });
         }
-
         function showSuccess() {
           container.innerHTML = '<div class="form-success">' +
             '<div class="success-icon">✓</div>' +

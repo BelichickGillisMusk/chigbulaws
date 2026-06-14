@@ -10,7 +10,7 @@ on:
       - master
       - main
   workflow_dispatch:
-# Pages deploy disabled — production uses Worker chigbulaws + R2 (see deploy-worker.yml).
+# Pages deploy is fallback/preview only — production uses Worker chigbulaws + R2 (see deploy-worker.yml).
 
 jobs:
   deploy:
@@ -24,10 +24,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Require Cloudflare credentials (non-PR runs)
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN is required for Cloudflare Pages deploys."
+            exit 1
+          fi
+          if [ -z "${{ vars.CLOUDFLARE_ACCOUNT_ID }}" ] && [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
+            echo "::error::CLOUDFLARE_ACCOUNT_ID must be set as an org variable or repo secret."
+            exit 1
+          fi
+
+      - name: Skip deploy when Cloudflare credentials are unavailable
+        if: ${{ github.event_name == 'pull_request' && (secrets.CLOUDFLARE_API_TOKEN == '' || (vars.CLOUDFLARE_ACCOUNT_ID == '' && secrets.CLOUDFLARE_ACCOUNT_ID == '')) }}
+        run: echo "::notice::Skipping Cloudflare Pages deploy for this pull request because Cloudflare credentials are not available."
+
       - name: Publish to Cloudflare Pages
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && (vars.CLOUDFLARE_ACCOUNT_ID != '' || secrets.CLOUDFLARE_ACCOUNT_ID != '') }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID || secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy . --project-name=chigbulaws --branch=${{ github.head_ref || github.ref_name }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

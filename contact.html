@@ -5,6 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Chigbu Law – Elk Grove, CA | 916-230-6381</title>
   <meta name="description" content="Contact Clifford Chigbu Attorney at Law in Elk Grove, CA. Call 916-230-6381 or email chigbulaw@sbcglobal.net to schedule your consultation." />
+  <link rel="canonical" href="https://chigbulaws.com/contact.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#1a2744" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <meta property="og:title" content="Contact Chigbu Law – Elk Grove, CA" />
+  <meta property="og:description" content="Schedule a consultation with Clifford Chigbu Attorney at Law. Elk Grove, CA · 916-230-6381." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chigbulaws.com/contact.html" />
+  <meta property="og:site_name" content="Chigbu Law" />
+  <meta property="og:image" content="https://chigbulaws.com/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://chigbulaws.com/og-image.svg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "url": "https://chigbulaws.com/contact.html",
+    "name": "Contact Chigbu Law",
+    "about": {
+      "@type": "LegalService",
+      "name": "Clifford Chigbu Attorney at Law",
+      "telephone": "+19162306381",
+      "email": "chigbulaw@sbcglobal.net",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4815 Laguna Park Drive",
+        "addressLocality": "Elk Grove",
+        "addressRegion": "CA",
+        "postalCode": "95758",
+        "addressCountry": "US"
+      },
+      "url": "https://chigbulaws.com",
+      "sameAs": [
+        "https://apps.calbar.ca.gov/attorney/Licensee/Detail/221386",
+        "https://www.facebook.com/chigbulaw"
+      ]
+    }
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -234,18 +277,18 @@
 
     <div class="contact-form-col">
       <h2>Schedule a Consultation</h2>
-      <form onsubmit="handleFormSubmit(event)">
+      <form id="contact-form" action="https://formspree.io/f/xpwzgkqp" method="POST" onsubmit="handleFormSubmit(event)">
         <div class="form-group">
           <label for="name">Full Name *</label>
-          <input type="text" id="name" name="name" placeholder="Your full name" required />
+          <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required />
         </div>
         <div class="form-group">
           <label for="phone">Phone Number *</label>
-          <input type="tel" id="phone" name="phone" placeholder="(916) 000-0000" required />
+          <input type="tel" id="phone" name="phone" placeholder="(916) 000-0000" autocomplete="tel" required />
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" />
+          <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
         </div>
         <div class="form-group">
           <label for="matter">Legal Matter</label>
@@ -265,6 +308,9 @@
           <label for="message">Brief Description</label>
           <textarea id="message" name="message" placeholder="Briefly describe your legal matter..."></textarea>
         </div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px;opacity:0;height:0;width:0;" aria-hidden="true" />
+        <input type="hidden" name="_subject" value="New Consultation Request — chigbulaws.com" />
+        <input type="hidden" name="form_source" value="contact.html" />
         <button type="submit" class="form-submit">Send Message</button>
         <p class="form-disclaimer">By submitting this form, you agree that contacting Chigbu Law does not create an attorney-client relationship. Do not send confidential information.</p>
       </form>
@@ -284,10 +330,39 @@
   <script>
     function handleFormSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = '✓ Message Sent — We\'ll be in touch soon!';
-      btn.style.background = '#16a34a';
+      const form = e.target;
+      const btn  = form.querySelector('.form-submit');
       btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function (r) {
+        if (r.ok) {
+          btn.textContent = '✓ Message Sent — Clifford\'s office will contact you within 1 business day.';
+          btn.style.background = '#16a34a';
+          form.reset();
+        } else {
+          return r.json().then(function (j) { throw new Error(j && j.error ? j.error : 'submit failed'); });
+        }
+      }).catch(function () {
+        // Mailto fallback so a real lawyer never loses a real lead
+        const params = new URLSearchParams();
+        for (const [k, v] of data.entries()) {
+          if (k.startsWith('_') || k === 'form_source') continue;
+          params.append(k, v);
+        }
+        const body = Array.from(params.entries()).map(function (kv) { return kv[0] + ': ' + kv[1]; }).join('\n');
+        window.location.href = 'mailto:chigbulaw@sbcglobal.net'
+          + '?subject=' + encodeURIComponent('New Consultation Request — chigbulaws.com')
+          + '&body=' + encodeURIComponent(body);
+        btn.textContent = 'Opening your email…';
+        btn.style.background = '#1a2744';
+        btn.disabled = false;
+      });
     }
   </script>
 </body>

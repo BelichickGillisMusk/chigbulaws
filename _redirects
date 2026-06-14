@@ -1,42 +1,43 @@
 # ═══════════════════════════════════════════════════════════════
-# CHIGBU LAW — CLOUDFLARE PAGES REDIRECTS
+# CHIGBU LAW — CLOUDFLARE WORKERS REDIRECTS
 # 301 permanent redirects from old Squarespace URLs to new clean URLs
+#
+# NOTE: Workers Static Assets serves HTML files at their clean URL
+# (/about instead of /about.html). Destinations use clean URLs to
+# avoid redirect loops (Workers would 307 /about.html → /about).
 # ═══════════════════════════════════════════════════════════════
 
 # ── ABOUT / MEET CLIFFORD ────────────────────────────────────────
-/meet-clifford                                          /about.html  301
-/about-clifford-chigbu-attorney-at-law-elk-grove        /about.html  301
-/about                                                  /about.html  301
+/meet-clifford                                          /about  301
+/about-clifford-chigbu-attorney-at-law-elk-grove        /about  301
 
 # ── CONTACT ──────────────────────────────────────────────────────
-/contact/contacts                                       /contact.html  301
-/contact                                                /contact.html  301
+/contact/contacts                                       /contact  301
 
 # ── SERVICES — old Squarespace nested paths ───────────────────────
-/elk-grove-legal-services/business-law-elk-grove        /business-law.html  301
-/elk-grove-legal-services/elk-grove-family-law          /family-law.html  301
-/elk-grove-legal-services/bankruptcy-lawyer-elk-grove   /bankruptcy-law.html  301
-/elk-grove-legal-services/personal-injury-elk-grove-attorney  /personal-injury.html  301
-/elk-grove-legal-services/elk-grove-immigration-law     /immigration-law.html  301
-/elk-grove-legal-services/elk-grove-auto-accident-attorney  /auto-accident.html  301
-/elk-grove-legal-services                               /index.html  301
+/elk-grove-legal-services/business-law-elk-grove        /business-law  301
+/elk-grove-legal-services/elk-grove-family-law          /family-law  301
+/elk-grove-legal-services/bankruptcy-lawyer-elk-grove   /bankruptcy-law  301
+/elk-grove-legal-services/personal-injury-elk-grove-attorney  /personal-injury  301
+/elk-grove-legal-services/elk-grove-immigration-law     /immigration-law  301
+/elk-grove-legal-services/elk-grove-auto-accident-attorney  /auto-accident  301
+/elk-grove-legal-services                               /  301
 
 # ── BLOG INDEX ───────────────────────────────────────────────────
 /elk-grove-legal-blog                                   /blog/  301
-/blog                                                   /blog/  301
 
 # ── BLOG POSTS — clean slugs ─────────────────────────────────────
 /elk-grove-legal-blog/a-new-chapter-for-chigbu-law-please-bear-with-us-during-our-website-transition  /blog/  301
-/elk-grove-legal-blog/clifford-chigbu-best-family-attorney-elk-grove-2025  /blog/gratitude-top-family-attorney.html  301
-/elk-grove-legal-blog/ezmsxrax6rs5fewbds36a92m8d8sdp   /blog/2026-new-laws.html  301
+/elk-grove-legal-blog/clifford-chigbu-best-family-attorney-elk-grove-2025  /blog/gratitude-top-family-attorney  301
+/elk-grove-legal-blog/ezmsxrax6rs5fewbds36a92m8d8sdp   /blog/2026-new-laws  301
 
 # ── BLOG POSTS — malformed Squarespace embedded-URL slugs ────────
-/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu    /blog/immigration-changes-2025.html  301
-/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-1  /blog/car-accident-elk-grove.html  301
-/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-2  /blog/california-family-law-basics.html  301
-/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-3  /blog/business-legal-requirements-sacramento.html  301
-/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-4  /blog/immigrant-immigration-law.html  301
-/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-5  /blog/divorce-sacramento.html  301
+/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu    /blog/immigration-changes-2025  301
+/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-1  /blog/car-accident-elk-grove  301
+/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-2  /blog/california-family-law-basics  301
+/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-3  /blog/business-legal-requirements-sacramento  301
+/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-4  /blog/immigrant-immigration-law  301
+/elk-grove-legal-blog/https/wwwchigbulawscom/elk-grove-legal-blog/2024/12/your-champion-in-the-courtroom-clifford-chigbu-5  /blog/divorce-sacramento  301
 
 # ── COMMON TYPOS / VARIANTS ───────────────────────────────────────
 /home                                                   /  301
@@ -47,9 +48,9 @@
 /reviews                                                /#testimonials  301
 
 # ── WWW → APEX ────────────────────────────────────────────────────
-# _redirects sources must be paths only (not full URLs). Point www and apex
-# at the same Pages project, then add a single Redirect Rule or Bulk Redirect
-# in Cloudflare: hostname eq www.chigbulaws.com → redirect to https://chigbulaws.com
+# Handle via Cloudflare Bulk Redirect rule in dashboard:
+# hostname eq www.chigbulaws.com → redirect to https://chigbulaws.com
 
 # ── 404 FALLBACK ──────────────────────────────────────────────────
-/*                                                      /404.html  404
+# Handled by wrangler.toml: not_found_handling = "404-page"
+# Workers serves /404.html automatically for all unmatched routes.

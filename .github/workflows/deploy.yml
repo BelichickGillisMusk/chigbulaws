@@ -3,14 +3,10 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches:
-      - master
       - main
-  pull_request:
-    branches:
       - master
-      - main
   workflow_dispatch:
-# Pages deploy disabled — production uses Worker chigbulaws + R2 (see deploy-worker.yml).
+# Prefer deploy-worker.yml (Worker + R2). This workflow is a Pages fallback only.
 
 jobs:
   deploy:
@@ -18,16 +14,17 @@ jobs:
     permissions:
       contents: read
       deployments: write
-      pull-requests: write
     name: Deploy to Cloudflare Pages
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=chigbulaws --branch=${{ github.head_ref || github.ref_name }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: chigbulaws
+          directory: .
+          # Optional: Use Wrangler version
+          wranglerVersion: '3'

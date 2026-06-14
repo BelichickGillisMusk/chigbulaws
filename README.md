@@ -1,15 +1,109 @@
 # Chigbu Law Website
 
-Law firm website for Chigbu Law, deployed on Cloudflare Pages.
+Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudflare Worker **`chigbulaws`** from R2 bucket **`chigbulaw`** (binding `CHIGBULAW`).
 
-## Deployment
+## Production architecture
 
 This site is automatically deployed to Cloudflare Pages on every push to `master` (and `main`, if used).
 Pull requests publish to a unique preview URL via the same workflow.
 
-### Setup Instructions
+### Which site content is uploaded?
 
-To connect this repository to Cloudflare Pages:
+**The new static site** built in this repo (`index.html`, service pages, `blog/`, etc.) — **not** the old Squarespace XML in `squarespace-export/` (that file is empty and is skipped on upload).
+
+### Deploy (zero-downtime order)
+
+1. **`npm run sync:r2`** — uploads the full new site to R2 (live Worker keeps serving until each key is replaced).
+2. **`npm run sync:r2:minimal`** — homepage only: `index.html` + CSS/JS + `404.html` (use if you want something live fast; other nav links 404 until full sync).
+3. **`npm run deploy`** — sync + `wrangler deploy` (updates Worker script only).
+
+```bash
+export CLOUDFLARE_API_TOKEN='...'
+export CLOUDFLARE_ACCOUNT_ID='...'
+npm ci
+npm run deploy
+```
+
+### GitHub CI/CD
+
+Workflow: **`.github/workflows/deploy-worker.yml`** on push to `master`.
+
+**Organization (recommended)** — use the Cloudflare token from your secure environment:
+
+| Where | Name | Value |
+|-------|------|--------|
+| [Org secret](https://github.com/organizations/BelichickGillisMusk/settings/secrets/actions) | `CLOUDFLARE_API_TOKEN` | Cloudflare API token |
+| [Org variable](https://github.com/organizations/BelichickGillisMusk/settings/variables/actions) | `CLOUDFLARE_ACCOUNT_ID` | `bafa242dd95d3fdce72540d20accd0a2` (or your account ID from Workers & Pages) |
+
+Automate from a machine with `gh` admin access:
+
+```bash
+chmod +x scripts/set-github-cloudflare-secrets.sh
+./scripts/set-github-cloudflare-secrets.sh
+```
+
+**Repository fallback:** [repo secrets](https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions) for both names if org settings are not available.
+
+Token permissions: **Workers Scripts Edit**, **R2 Object Read/Write**, and **Zone DNS Edit** if you use `scripts/cloudflare-go-live.sh`.
+
+After saving, run **Actions → Deploy chigbulaws Worker → Run workflow**, or push to `master`.
+
+Connect in Cloudflare: **Workers & Pages** → **chigbulaws** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
+
+Redirects from `_redirects` are applied by the Worker (loaded from R2).
+
+### R2 public development URL
+
+Bucket **`chigbulaw`** can expose a Cloudflare-managed **`r2.dev`** URL (non-production preview only):
+
+**https://pub-24d24f9a69cf4abb888e24096291e3a2.r2.dev**
+
+| Check | Expected |
+|-------|----------|
+| Public access enabled | R2 dashboard → bucket → **Public Development URL** → Allowed |
+| Objects uploaded | `npm run sync:r2` (same keys as the Worker: `index.html`, `about.html`, …) |
+| Homepage | Open **`/index.html`** — `r2.dev` does not apply `_redirects` or map `/` to `index.html` |
+| Production | Use Worker **`chigbulaws`** + **`chigbulaws.com`**, not `r2.dev` |
+
+Verify after sync:
+
+```bash
+npm run verify:r2-public
+# or: R2_PUBLIC_URL=https://pub-....r2.dev npm run verify:r2-public
+```
+
+If every path returns **404**, the bucket is empty or sync ran against a different account. Use an API token with **R2 Object Read/Write** on the account that owns `chigbulaw`.
+
+---
+
+## Go live today (Error 1000 + deploy)
+
+Full checklist: **[GO-LIVE.md](GO-LIVE.md)**.
+
+**Production host:** Worker **`chigbulaws`** + R2 **`chigbulaw`** — not Cloudflare Pages. Do **not** point DNS at `chigbulaws.pages.dev` unless you intentionally use the legacy Pages project.
+
+1. **`chigbulaws.com` zone** must be in the **same** Cloudflare account as `CLOUDFLARE_ACCOUNT_ID` (see `wrangler.toml`). Add the zone at [dash.cloudflare.com](https://dash.cloudflare.com) if it is missing.
+2. **API token:** **Workers Scripts Edit**, **R2 Object Read/Write**, **Zone DNS Edit**.
+3. **GitHub** → **Settings → Secrets** → `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
+4. **Deploy** (sync R2 + Worker + custom domains):
+
+   ```bash
+   export CLOUDFLARE_API_TOKEN='...'
+   export CLOUDFLARE_ACCOUNT_ID='bafa242dd95d3fdce72540d20accd0a2'
+   npm ci && npm run deploy
+   ```
+
+   Or DNS cleanup + deploy: `./scripts/cloudflare-go-live.sh`
+
+5. Push to **`master`** → **Actions → Deploy chigbulaws Worker**.
+
+**Squarespace export:** put files under `squarespace-export/` (reference only; not deployed).
+
+## Deployment (legacy Pages)
+
+Cloudflare **Pages** is no longer the primary host. Use the Worker workflow above. The old Pages workflow is manual-only (`deploy-cloudflare.yml`).
+
+### Setup Instructions (GitHub Actions)
 
 1. **Get your Cloudflare credentials:**
    - Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/)
@@ -96,3 +190,29 @@ Keep the NAP **exactly** consistent everywhere (`4815 Laguna Park Drive, Elk Gro
 - Responsive design
 - Facebook integration
 - FAQ schema for rich snippets
+
+## Troubleshooting: Error 1000 (DNS points to prohibited IP)
+
+DNS for `chigbulaws.com` points at an IP Cloudflare will not use as an origin—often a proxied **A** record to Cloudflare anycast (`104.x`, `172.x`), old **Squarespace** IPs, or a **double proxy**.
+
+### Fix (about 5 minutes in the dashboard)
+
+Use the **Worker** `chigbulaws`, not the Pages project.
+
+1. **Workers & Pages** → **`chigbulaws`** (Worker) → **Settings** → **Domains & Routes** → **Add Custom Domain** → `chigbulaws.com` and `www.chigbulaws.com`. Wait until **Active** (or run `npm run deploy` from this repo).
+
+2. **DNS** → **Records** for `chigbulaws.com`. **Delete** conflicting records:
+   - **A** / **AAAA** on `@` or `www` pointing to Cloudflare IPs (`104.x`, `172.x`, etc.) or Squarespace
+   - **CNAME** `www` → `ext-cust.squarespace.com` (or similar) while proxied
+   - **CNAME** `@` → `chigbulaws.pages.dev` if you are on the Worker (not Pages)
+   - Duplicate `@` / `www` records from the Squarespace migration
+
+3. **Do not** create a manual **A** record to a Cloudflare IP. Let **Custom Domain** on the Worker create the correct DNS.
+
+4. **R2 + deploy:** `npm run sync:r2` then `npm run deploy`. Open `https://chigbulaws.com/`.
+
+5. Optional: **SSL/TLS** → **Full (strict)**; **Redirect Rule** `www.chigbulaws.com` → `https://chigbulaws.com`.
+
+**Legacy Pages only:** CNAME `@` / `www` → `chigbulaws.pages.dev` and add custom domains on the **Pages** project — see [GO-LIVE.md](GO-LIVE.md).
+
+Reference: [Error 1000](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1000/), [Worker custom domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).

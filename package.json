@@ -2,8 +2,8 @@
   "name": "chigbulaws",
   "private": true,
   "scripts": {
-    "deploy": "wrangler pages deploy . --project-name=chigbulaws",
-    "preview": "wrangler pages dev . --project-name=chigbulaws",
+    "deploy": "wrangler pages deploy . --project-name=chigbulaws1",
+    "preview": "wrangler pages dev . --project-name=chigbulaws1",
     "dev": "python3 -m http.server 8080"
   },
   "devDependencies": {

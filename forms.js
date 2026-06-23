@@ -50,6 +50,7 @@
         const steps = JSON.parse(container.getAttribute('data-steps'));
         const formId = container.getAttribute('data-form-id') || 'Intake';
         const formspreeId = container.getAttribute('data-formspree') || '';
+        const formsubmitEmail = container.getAttribute('data-email') || 'chigbulaw@sbcglobal.net';
         let currentStep = 0;
         let lang = 'en';
         const formData = {};
@@ -332,22 +333,23 @@
             form_type: formId
           });
 
-          // Try Formspree if configured
-          const endpoint = formspreeId ? 'https://formspree.io/f/' + formspreeId : null;
+          // Submit to FormSubmit.co — delivers directly to chigbulaw@sbcglobal.net
+          const endpoint = 'https://formsubmit.co/' + formsubmitEmail;
+          const formBody = new FormData();
+          Object.entries(payload).forEach(function (kv) {
+            const val = Array.isArray(kv[1]) ? kv[1].join(', ') : (kv[1] || '');
+            formBody.append(kv[0], val);
+          });
+          formBody.append('_captcha', 'false');
 
-          if (endpoint) {
-            fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify(payload)
-            }).then(function (r) {
-              if (r.ok) { showSuccess(); }
-              else { showFallback(); }
-            }).catch(function () { showFallback(); });
-          } else {
-            // Fallback: open mailto
-            showFallback();
-          }
+          fetch(endpoint, {
+            method: 'POST',
+            body: formBody,
+            headers: { 'Accept': 'application/json' }
+          }).then(function (r) {
+            if (r.ok) { showSuccess(); }
+            else { showFallback(); }
+          }).catch(function () { showFallback(); });
         }
 
         function showSuccess() {

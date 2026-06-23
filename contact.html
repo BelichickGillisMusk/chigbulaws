@@ -273,11 +273,20 @@
         License Status: <strong style="color:#16a34a">Active</strong><br>
         <a href="https://apps.calbar.ca.gov/attorney/Licensee/Detail/221386" target="_blank" rel="noopener">Verify on California State Bar →</a></p>
       </div>
+
+      <div class="contact-map">
+        <iframe
+          src="https://maps.google.com/maps?q=4815+Laguna+Park+Drive,+Elk+Grove,+CA+95758&output=embed"
+          title="Chigbu Law Office — 4815 Laguna Park Drive, Elk Grove, CA 95758"
+          width="100%" height="220" style="border:0;border-radius:8px;margin-top:1rem;" allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
     </div>
 
     <div class="contact-form-col">
       <h2>Schedule a Consultation</h2>
-      <form id="contact-form" action="https://formspree.io/f/xpwzgkqp" method="POST" onsubmit="handleFormSubmit(event)">
+      <form id="contact-form" action="https://formsubmit.co/chigbulaw@sbcglobal.net" method="POST" onsubmit="handleFormSubmit(event)">
         <div class="form-group">
           <label for="name">Full Name *</label>
           <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required />
@@ -308,8 +317,10 @@
           <label for="message">Brief Description</label>
           <textarea id="message" name="message" placeholder="Briefly describe your legal matter..."></textarea>
         </div>
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px;opacity:0;height:0;width:0;" aria-hidden="true" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px;opacity:0;height:0;width:0;" aria-hidden="true" />
         <input type="hidden" name="_subject" value="New Consultation Request — chigbulaws.com" />
+        <input type="hidden" name="_next" value="https://chigbulaws.com/contact?sent=1" />
+        <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="form_source" value="contact.html" />
         <button type="submit" class="form-submit">Send Message</button>
         <p class="form-disclaimer">By submitting this form, you agree that contacting Chigbu Law does not create an attorney-client relationship. Do not send confidential information.</p>
@@ -349,7 +360,7 @@
           return r.json().then(function (j) { throw new Error(j && j.error ? j.error : 'submit failed'); });
         }
       }).catch(function () {
-        // Mailto fallback so a real lawyer never loses a real lead
+        // Mailto fallback — ensures no lead is ever lost
         const params = new URLSearchParams();
         for (const [k, v] of data.entries()) {
           if (k.startsWith('_') || k === 'form_source') continue;
@@ -359,7 +370,7 @@
         window.location.href = 'mailto:chigbulaw@sbcglobal.net'
           + '?subject=' + encodeURIComponent('New Consultation Request — chigbulaws.com')
           + '&body=' + encodeURIComponent(body);
-        btn.textContent = 'Opening your email…';
+        btn.textContent = 'Opening your email app…';
         btn.style.background = '#1a2744';
         btn.disabled = false;
       });

@@ -10,10 +10,12 @@ ORG="${GITHUB_ORG:-BelichickGillisMusk}"
 REPO="${GITHUB_REPO:-BelichickGillisMusk/chigbulaws}"
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
-  if printenv | grep -qi '^cloudflare token='; then
-    eval "$(printenv | grep -i '^cloudflare token=' | sed 's/^cloudflare token=/CLOUDFLARE_API_TOKEN=/' | head -1)"
+  _cf_val="$(printenv | grep -i '^cloudflare token=' | sed 's/^[^=]*=//' | head -1)"
+  if [[ -n "${_cf_val}" ]]; then
+    CLOUDFLARE_API_TOKEN="${_cf_val}"
     export CLOUDFLARE_API_TOKEN
   fi
+  unset _cf_val
 fi
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then

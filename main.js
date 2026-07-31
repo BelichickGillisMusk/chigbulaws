@@ -105,36 +105,4 @@ if ('IntersectionObserver' in window) {
       footerBottom.appendChild(credit);
     }
   }
-
-  // Retain useful business schema while removing the stale rating count and
-  // self-published review markup that is not eligible for local-business stars.
-  document.querySelectorAll('script[type="application/ld+json"]').forEach((script) => {
-    try {
-      const data = JSON.parse(script.textContent);
-      const schemas = Array.isArray(data) ? data : [data];
-      let changed = false;
-
-      schemas.forEach((schema) => {
-        const types = Array.isArray(schema['@type']) ? schema['@type'] : [schema['@type']];
-        if (types.includes('LegalService') || types.includes('LocalBusiness')) {
-          if (schema.aggregateRating) {
-            delete schema.aggregateRating;
-            changed = true;
-          }
-          if (schema.review) {
-            delete schema.review;
-            changed = true;
-          }
-          schema.award = 'BusinessRate Best of 2026 — Family Law Attorney, Elk Grove, California';
-          changed = true;
-        }
-      });
-
-      if (changed) {
-        script.textContent = JSON.stringify(Array.isArray(data) ? schemas : schemas[0]);
-      }
-    } catch (error) {
-      console.warn('Schema maintenance skipped:', error);
-    }
-  });
 })();

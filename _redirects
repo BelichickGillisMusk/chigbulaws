@@ -12,7 +12,19 @@
 /about-clifford-chigbu-attorney-at-law-elk-grove        /about  301
 
 # ── CONTACT ──────────────────────────────────────────────────────
+# Preserve every common legacy/contact variation so visitors never
+# reach a blank 404 from an old bookmark, indexed URL, or www link.
 /contact/contacts                                       /contact  301
+/contact-us                                             /contact  301
+/contact-us/                                            /contact  301
+/contactus                                              /contact  301
+/contactus/                                             /contact  301
+/contact-chigbu-law                                     /contact  301
+/contact-chigbu-law/                                    /contact  301
+/make-an-appointment                                   /contact  301
+/make-an-appointment/                                  /contact  301
+/appointment                                            /contact  301
+/appointment/                                           /contact  301
 
 # ── SERVICES — old Squarespace nested paths ───────────────────────
 /elk-grove-legal-services/business-law-elk-grove        /business-law  301
@@ -48,8 +60,8 @@
 /reviews                                                /#testimonials  301
 
 # ── WWW → APEX ────────────────────────────────────────────────────
-# Handle via Cloudflare Bulk Redirect rule in dashboard:
-# hostname eq www.chigbulaws.com → redirect to https://chigbulaws.com
+# Handle via Cloudflare Bulk Redirect rule in dashboard and preserve path:
+# www.chigbulaws.com/* → https://chigbulaws.com/$1
 
 # ── 404 FALLBACK ──────────────────────────────────────────────────
 # Handled by wrangler.toml: not_found_handling = "404-page"

@@ -1,65 +1,72 @@
-# Clifford Chigbu Attorney at Law — chigbulaws.com
+# CLIFFORD CHIGBU ATTORNEY AT LAW — WEBSITE
 
-Website for **Clifford Chigbu, Attorney at Law** (Elk Grove, CA).  
-Built with **Astro 5**, deployed on **Cloudflare Workers Static Assets**.
+## README FOR LLMs AND HUMANS
 
-> Cursor agents: read **`.cursorrules`** before any change. Bryan must approve architecture, design, config, and deploys.
+> **⚠️ CRITICAL RULE FOR LLMs:** Only use the files and structure in this repository for edits and blog posts. Do NOT create new frameworks, redesign the layout, change the tech stack, or add new dependencies. To make changes: edit the existing `.astro` files, add `.md` files to `src/content/blog/`, or edit `public/_redirects`. That's it. The design, layout, styling, and architecture are final — do not modify them unless explicitly asked to by the user.
 
-## Business info
+---
 
-| Field | Value |
-|-------|--------|
-| Name | Clifford Chigbu, Attorney at Law |
-| Phone | 916-230-6381 |
-| Email | chigbulaw@sbcglobal.net |
-| Intake (contact form) | **chigbulaw@sbcglobal.net** AND **fsu9913@gmail.com** |
-| Address | 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758 |
-| Website | https://chigbulaws.com |
-| Google Business Profile | https://share.google/SVzBMps2zWv25qirL |
-| Facebook | https://www.facebook.com/chigbulaw |
-| Design credit | [MLB Marketing LLC](https://mlbmarketingllc.com) |
+## BUSINESS INFO (use in all content)
 
-## What Cursor may do without approval
+- **Name:** Clifford Chigbu, Attorney at Law
+- **Phone:** 916-230-6381 (use `tel:9162306381`)
+- **Email:** chigbulaw@sbcglobal.net (use `mailto:chigbulaw@sbcglobal.net`)
+- **Contact form sends to:** chigbulaw@sbcglobal.net (primary) + fsu9913@gmail.com (backup)
+- **Address:** 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758
+- **Website:** https://chigbulaws.com
+- **Google Business Profile:** https://share.google/SVzBMps2zWv25qirL
+- **Facebook:** https://www.facebook.com/chigbulaw
+- **Site design credit:** MLB Marketing LLC (https://mlbmarketingllc.com)
 
-1. Add blog posts as `.md` in `src/content/blog/`
-2. Edit existing blog `.md` files
-3. Edit text in existing `.astro` pages (typos, wording, facts)
-4. Add redirect entries to `public/_redirects`
+## BRANDING
 
-## What requires Bryan's approval
+- **Colors:** Navy deep `#1a2744`, Gold `#c9a227`, Gold light `#e0b84a`
+- **Fonts:** Playfair Display (headings/serif), Inter (body/sans)
+- **Logo:** Scales of justice SVG (in `public/favicon.svg`)
+- **OG image:** `public/og-image.svg`
 
-- New `.astro` pages/files
-- Changes to `BaseLayout.astro` / `PracticeLayout.astro`
-- Changes to `wrangler.jsonc`, `astro.config.mjs`, or `package.json`
-- New npm dependencies
-- Design / colors / fonts / styling
-- Tech-stack or project restructure
-- Deleting files
-- Deploying
-- Touching any other Worker or project
-- Changing URL paths, redirects structure, or page structure (SEO)
+---
 
-## Blog posts
+## HOW TO ADD A BLOG POST
 
-### Template
+### For humans (via GitHub web editor)
+
+1. Go to GitHub → this repo → `src/content/blog/`
+2. Click "Add file" → "Create new file"
+3. Name it: `my-new-post-slug.md` (use kebab-case, no spaces)
+4. Paste this template at the top:
 
 ```markdown
 ---
-title: "Post Title Here"
-description: "One-sentence summary for SEO and blog listing."
+title: "Your Post Title Here"
+description: "A one-sentence summary for SEO and the blog listing."
 pubDate: 2026-08-08
 author: "Clifford Chigbu"
 tags: ["family-law", "elk-grove"]
 draft: false
 ---
 
-Write the post content here in Markdown.
+Write your post content here in plain text or Markdown.
 ```
 
-### Tags (use 1–3)
+5. Choose 1–3 tags from the table below (include `firm-news` for firm announcements).
+6. Commit to `main` (or open a PR if Bryan prefers review first).
+7. After publish, share the live URL on **Google Business Profile**, **Facebook**, and **X.com**.
 
-| Tag | Category |
-|-----|----------|
+### For Cursor / LLMs
+
+1. Read `.cursorrules` first.
+2. Create `src/content/blog/<slug>.md` using the template above.
+3. Do not create new frameworks, pages, layouts, or dependencies.
+4. Prepare share drafts for GBP / Facebook / X.com in the PR description.
+5. Do **not** deploy unless Bryan explicitly approves.
+
+---
+
+## BLOG TAGS (use 1–3 per post)
+
+| Tag | Shows as category |
+|-----|-------------------|
 | firm-recognition | Firm Recognition |
 | law-updates | Law Updates |
 | family-law | Family Law |
@@ -75,37 +82,55 @@ Write the post content here in Markdown.
 | personal-story | Immigration |
 | compliance | Business Law |
 | basics | Family Law |
-| **firm-news** | **Firm News** |
+| firm-news | Firm News |
 
-### Rules
+## BLOG POST RULES
 
-- Professional, accessible tone
-- First person for personal stories; third person for informational posts
-- About 500–1500 words
-- End with CTA to `/contact` or 916-230-6381
-- No case-specific legal advice
-- Footer holds the global disclaimer
+- **Tone:** Professional but accessible. Attorney speaking to potential clients.
+- **Voice:** First person for personal stories; third person for informational posts.
+- **Length:** 500–1500 words typical.
+- **Always end with:** A call-to-action pointing to `/contact` or calling 916-230-6381.
+- **Never include:** Specific legal advice for individual cases.
+- **No disclaimer needed:** Global disclaimer is in the footer.
 
-### Social sharing after publish
+## SOCIAL SHARING (after each published post)
 
-1. Google Business Profile (≤1500 chars + URL)
-2. Facebook (`chigbulaw`) caption + URL
-3. X.com short caption + URL
+1. **Google Business Profile** — ≤1500 characters + live post URL (`https://share.google/SVzBMps2zWv25qirL`)
+2. **Facebook** — caption + live URL for https://www.facebook.com/chigbulaw
+3. **X.com** — short caption + live URL
 
-## Deploy (Bryan approval required)
+---
+
+## WHAT REQUIRES BRYAN'S APPROVAL
+
+1. New `.astro` files or pages
+2. Changes to `BaseLayout.astro` or `PracticeLayout.astro`
+3. Changes to `wrangler.jsonc`, `astro.config.mjs`, or `package.json`
+4. New npm dependencies
+5. Design, colors, fonts, or styling changes
+6. Restructuring the project or changing the tech stack
+7. Deleting existing files
+8. Deploying
+9. Touching any other Worker or project folder
+10. Changing URL paths, redirects structure, or page structure (SEO protection)
+
+## DEPLOY (Bryan approval required)
 
 ```bash
 npm install
-npm run deploy
+npm run deploy    # builds + deploys to Cloudflare Workers
 ```
 
-Or push to `main` if Workers Builds / GitHub auto-deploy is connected.
+Or, if GitHub auto-deploy / Workers Builds is connected, `git push` to `main`.
 
-## 404 / URL handling
+**Do not deploy without Bryan's explicit permission.**
 
-Do **not** revert to `html_handling: "none"`.  
-This project expects Astro `build.format: "directory"` with `html_handling: "auto-trailing-slash"`.
+## THE 404 FIX
 
-## Current migration note
+The old Worker had `html_handling: "none"` causing 404s on clean URLs. This project uses Astro `build.format: "directory"` + `html_handling: "auto-trailing-slash"`. Do not change these settings.
 
-Until the Astro `src/layouts/` + `src/pages/` merge from Cloudflare’s starter cards is complete, keep NAP, forms, blog HTML, and SEO fixes consistent with `.cursorrules`. Do not invent a parallel stack without Bryan’s approval.
+## RELATED FILES
+
+- `.cursorrules` — mandatory Cursor/LLM operating rules
+- `agents/HERMES-BLOG-AGENT.md` — monthly blog/share subagent training card
+- `SEO-AGENT.md` — broader SEO / backlink safety rules

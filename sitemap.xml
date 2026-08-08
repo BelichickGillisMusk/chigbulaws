@@ -65,12 +65,24 @@
   <!-- ── BLOG INDEX ─────────────────────────────────────────── -->
   <url>
     <loc>https://chigbulaws.com/blog/</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- ── BLOG POSTS ─────────────────────────────────────────── -->
+  <url>
+    <loc>https://chigbulaws.com/blog/back-to-school-custody-elk-grove.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://chigbulaws.com/blog/best-family-law-attorney-elk-grove-2026.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
   <url>
     <loc>https://chigbulaws.com/blog/2026-new-laws.html</loc>
     <lastmod>2026-03-28</lastmod>

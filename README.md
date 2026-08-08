@@ -151,10 +151,11 @@ Yes — blog posts can and should be shared to Google Business Profile, Facebook
 
 ---
 
-## EXISTING BLOG POSTS (10 total)
+## EXISTING BLOG POSTS (11 total)
 
 | File | Title | Date | Tags |
 |------|-------|------|------|
+| `back-to-school-custody-elk-grove.md` | Back-to-School Parenting Plans for Elk Grove Families | 2026-08-08 | family-law, elk-grove, sacramento |
 | `best-family-law-attorney-elk-grove-2026.md` | Two Years in a Row: Clifford Chigbu Recognized as a Best Family Law Attorney in Elk Grove | 2026-07-21 | firm-recognition, family-law, elk-grove |
 | `2026-new-laws.md` | 2026: New State and Federal Laws You Need to Know | 2026-03-28 | law-updates, legislation, california |
 | `welcome-to-chigbu-law.md` | A New Chapter for Chigbu Law | 2026-01-15 | firm-news, elk-grove |

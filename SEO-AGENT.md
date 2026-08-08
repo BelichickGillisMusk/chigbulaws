@@ -21,6 +21,8 @@ Maintain the Chigbu Law website, local-search signals, internal links, schema, a
 7. Validate JSON-LD against visible page facts; update review counts only from a verified source.
 8. Open a pull request with: pages changed, links fixed, schema changed, and outreach completed.
 
+For the dedicated blog/share subagent prompt, use `agents/HERMES-BLOG-AGENT.md`.
+
 ## Backlink priorities
 Prioritize links that a real prospective client could use:
 - California State Bar profile and other verified legal directories.

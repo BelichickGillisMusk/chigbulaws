@@ -171,7 +171,9 @@ method and paste it into the `content=""` value, then re-deploy.
 ## Google Business Profile
 
 The site is configured to support the GBP listing:
-- LocalBusiness / LegalService JSON-LD with NAP, hours, geo, and `sameAs` to the State Bar listing.
+- LocalBusiness / LegalService JSON-LD with NAP, hours, geo, and `sameAs` to State Bar, Facebook, and GBP (`https://share.google/SVzBMps2zWv25qirL`).
+- Homepage award “Google Reviews” row links to the live GBP/reviews profile.
+- Footer “Google Business Profile & Reviews” link on core, service, and blog pages.
 - `logo.svg` is referenced for the Knowledge Panel.
 - `_redirects` preserves all 301s from the old Squarespace URLs that the GBP listing or backlinks may still point to.
 
@@ -180,6 +182,8 @@ Keep the NAP **exactly** consistent everywhere (`4815 Laguna Park Drive, Elk Gro
 - `index.html` JSON-LD
 - `about.html` and `contact.html`
 - The site footer
+
+Blog / share process for subagents: see `agents/HERMES-BLOG-AGENT.md`.
 
 ## Features
 

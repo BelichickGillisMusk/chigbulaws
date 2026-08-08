@@ -32,6 +32,8 @@ Protect and grow `chigbulaws.com` content quality: one useful monthly blog, corr
 7. **Share pack** (deliver in PR body, do not auto-post):
    - Facebook caption + URL
    - GBP post ≤ 1,500 characters + URL + suggested photo note
+   - X.com short caption + URL
+   - Prefer tags from `.cursorrules` (include `firm-news` when appropriate)
 8. **PR checklist** — pages changed, links added, schema touched, share drafts attached, verification notes.
 
 ## Output template for every run

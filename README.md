@@ -169,7 +169,7 @@ Yes — blog posts can and should be shared to Google Business Profile, Facebook
 
 ### ⚠️ TODO: FILL IN BLOG CONTENT
 
-9 of the 10 blog posts currently contain only the title, description, and a `<!-- TODO -->` comment. The full original content from the WordPress/HTML version needs to be pasted in.
+Several older posts may still need full body text migrated into Markdown stubs when the Astro content collection is fully wired. New posts (including `back-to-school-custody-elk-grove.md`) should ship with complete Markdown bodies.
 
 **Source of original content:**
 

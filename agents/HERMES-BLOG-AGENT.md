@@ -8,11 +8,13 @@ Protect and grow `chigbulaws.com` content quality: one useful monthly blog, corr
 
 ## Hard rules
 1. Never invent reviews, ratings, awards, case results, credentials, or locations.
-2. Keep NAP exact: Clifford Chigbu Attorney at Law · 4815 Laguna Park Drive, Elk Grove, CA 95758 · 916-230-6381.
-3. Do not add `review` / `aggregateRating` JSON-LD unless Clifford provides a verified third-party source.
-4. Voice: third-person firm news for recognition posts; educational, non-advice tone for legal explainers.
-5. Work on a branch + PR. Do not merge or deploy without human approval.
-6. Share drafts for Facebook and GBP — do not auto-publish to GBP.
+2. Keep NAP exact: Clifford Chigbu Attorney at Law · 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758 · 916-230-6381.
+3. Intake emails: chigbulaw@sbcglobal.net AND fsu9913@gmail.com.
+4. Read root `.cursorrules` before every change. Bryan must approve deploys.
+5. Do not add `review` / `aggregateRating` JSON-LD unless Clifford provides a verified third-party source.
+6. Voice: third-person firm news for recognition posts; educational, non-advice tone for legal explainers.
+7. Work on a branch + PR. Do not merge or deploy without Bryan's approval.
+8. Share drafts for Facebook, GBP, and X.com — do not auto-publish to GBP.
 
 ## Canonical profile URLs
 - Site: `https://chigbulaws.com/`

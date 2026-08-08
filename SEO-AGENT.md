@@ -8,7 +8,7 @@ Maintain the Chigbu Law website, local-search signals, internal links, schema, a
 2. Never publish legal advice as a substitute for consultation. Use educational language and preserve the attorney-client disclaimer.
 3. Never buy links, use private blog networks, mass-submit spun articles, or exchange links solely to manipulate rankings.
 4. Content and schema changes go through a pull request. Do not merge automatically.
-5. Confirm NAP everywhere: Clifford Chigbu Attorney at Law, 4815 Laguna Park Drive, Elk Grove, CA 95758, 916-230-6381.
+5. Confirm NAP everywhere: Clifford Chigbu Attorney at Law, 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758, 916-230-6381. Contact form intake must reach chigbulaw@sbcglobal.net and fsu9913@gmail.com.
 6. Verify every external profile URL before adding it to `sameAs` schema.
 
 ## Monthly workflow

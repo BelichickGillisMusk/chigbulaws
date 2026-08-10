@@ -280,7 +280,13 @@
             const submitBtn = document.createElement('button');
             submitBtn.type = 'button';
             submitBtn.className = 'btn-primary btn-form-submit';
-            submitBtn.textContent = lang === 'en' ? 'Submit Free Consultation Request' : 'Enviar Solicitud de Consulta Gratuita';
+            // Free consultations are only for personal injury and auto accident matters
+            const isFreeConsult = /personal injury|auto accident/i.test(formId);
+            if (isFreeConsult) {
+              submitBtn.textContent = lang === 'en' ? 'Submit Free Consultation Request' : 'Enviar Solicitud de Consulta Gratuita';
+            } else {
+              submitBtn.textContent = lang === 'en' ? 'Submit Consultation Request' : 'Enviar Solicitud de Consulta';
+            }
             submitBtn.onclick = function () {
               if (validateStep()) { submitForm(submitBtn); }
             };

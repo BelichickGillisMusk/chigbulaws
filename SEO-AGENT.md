@@ -8,7 +8,7 @@ Maintain the Chigbu Law website, local-search signals, internal links, schema, a
 2. Never publish legal advice as a substitute for consultation. Use educational language and preserve the attorney-client disclaimer.
 3. Never buy links, use private blog networks, mass-submit spun articles, or exchange links solely to manipulate rankings.
 4. Content and schema changes go through a pull request. Do not merge automatically.
-5. Confirm NAP everywhere: Clifford Chigbu Attorney at Law, 4815 Laguna Park Drive, Elk Grove, CA 95758, 916-230-6381.
+5. Confirm NAP everywhere: Clifford Chigbu Attorney at Law, 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758, 916-230-6381. Contact form intake must reach chigbulaw@sbcglobal.net and fsu9913@gmail.com.
 6. Verify every external profile URL before adding it to `sameAs` schema.
 
 ## Monthly workflow
@@ -20,6 +20,8 @@ Maintain the Chigbu Law website, local-search signals, internal links, schema, a
 6. Prepare one Google Business Profile post derived from the article. Do not auto-publish it.
 7. Validate JSON-LD against visible page facts; update review counts only from a verified source.
 8. Open a pull request with: pages changed, links fixed, schema changed, and outreach completed.
+
+For the dedicated blog/share subagent prompt, use `agents/HERMES-BLOG-AGENT.md`.
 
 ## Backlink priorities
 Prioritize links that a real prospective client could use:

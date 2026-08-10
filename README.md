@@ -1,218 +1,267 @@
-# Chigbu Law Website
+# CLIFFORD CHIGBU ATTORNEY AT LAW — WEBSITE
 
-Law firm website for **Clifford Chigbu Attorney at Law**, served by the Cloudflare Worker **`chigbulaws`** from R2 bucket **`chigbulaw`** (binding `CHIGBULAW`).
+## README FOR LLMs AND HUMANS
 
-## Production architecture
-
-This site is automatically deployed to Cloudflare Pages on every push to `master` (and `main`, if used).
-Pull requests publish to a unique preview URL via the same workflow.
-
-### Which site content is uploaded?
-
-**The new static site** built in this repo (`index.html`, service pages, `blog/`, etc.) — **not** the old Squarespace XML in `squarespace-export/` (that file is empty and is skipped on upload).
-
-### Deploy (zero-downtime order)
-
-1. **`npm run sync:r2`** — uploads the full new site to R2 (live Worker keeps serving until each key is replaced).
-2. **`npm run sync:r2:minimal`** — homepage only: `index.html` + CSS/JS + `404.html` (use if you want something live fast; other nav links 404 until full sync).
-3. **`npm run deploy`** — sync + `wrangler deploy` (updates Worker script only).
-
-```bash
-export CLOUDFLARE_API_TOKEN='...'
-export CLOUDFLARE_ACCOUNT_ID='...'
-npm ci
-npm run deploy
-```
-
-### GitHub CI/CD
-
-Workflow: **`.github/workflows/deploy-worker.yml`** on push to `master`.
-
-**Organization (recommended)** — use the Cloudflare token from your secure environment:
-
-| Where | Name | Value |
-|-------|------|--------|
-| [Org secret](https://github.com/organizations/BelichickGillisMusk/settings/secrets/actions) | `CLOUDFLARE_API_TOKEN` | Cloudflare API token |
-| [Org variable](https://github.com/organizations/BelichickGillisMusk/settings/variables/actions) | `CLOUDFLARE_ACCOUNT_ID` | `bafa242dd95d3fdce72540d20accd0a2` (or your account ID from Workers & Pages) |
-
-Automate from a machine with `gh` admin access:
-
-```bash
-chmod +x scripts/set-github-cloudflare-secrets.sh
-./scripts/set-github-cloudflare-secrets.sh
-```
-
-**Repository fallback:** [repo secrets](https://github.com/BelichickGillisMusk/chigbulaws/settings/secrets/actions) for both names if org settings are not available.
-
-Token permissions: **Workers Scripts Edit**, **R2 Object Read/Write**, and **Zone DNS Edit** if you use `scripts/cloudflare-go-live.sh`.
-
-After saving, run **Actions → Deploy chigbulaws Worker → Run workflow**, or push to `master`.
-
-Connect in Cloudflare: **Workers & Pages** → **chigbulaws** → **Settings** → **Builds** → link this GitHub repo (or rely on Actions-only deploy).
-
-Redirects from `_redirects` are applied by the Worker (loaded from R2).
-
-### R2 public development URL
-
-Bucket **`chigbulaw`** can expose a Cloudflare-managed **`r2.dev`** URL (non-production preview only):
-
-**https://pub-24d24f9a69cf4abb888e24096291e3a2.r2.dev**
-
-| Check | Expected |
-|-------|----------|
-| Public access enabled | R2 dashboard → bucket → **Public Development URL** → Allowed |
-| Objects uploaded | `npm run sync:r2` (same keys as the Worker: `index.html`, `about.html`, …) |
-| Homepage | Open **`/index.html`** — `r2.dev` does not apply `_redirects` or map `/` to `index.html` |
-| Production | Use Worker **`chigbulaws`** + **`chigbulaws.com`**, not `r2.dev` |
-
-Verify after sync:
-
-```bash
-npm run verify:r2-public
-# or: R2_PUBLIC_URL=https://pub-....r2.dev npm run verify:r2-public
-```
-
-If every path returns **404**, the bucket is empty or sync ran against a different account. Use an API token with **R2 Object Read/Write** on the account that owns `chigbulaw`.
+> **⚠️ CRITICAL RULE FOR LLMs:** Only use the files and structure in this repository for edits and blog posts. Do NOT create new frameworks, redesign the layout, change the tech stack, or add new dependencies. To make changes: edit the existing `.astro` files, add `.md` files to `src/content/blog/`, or edit `public/_redirects`. That's it. The design, layout, styling, and architecture are final — do not modify them unless explicitly asked to by the user.
 
 ---
 
-## Go live today (Error 1000 + deploy)
+## BUSINESS INFO (use in all content)
 
-Full checklist: **[GO-LIVE.md](GO-LIVE.md)**.
+- **Name:** Clifford Chigbu, Attorney at Law
+- **Phone:** 916-230-6381 (use `tel:9162306381`)
+- **Email:** chigbulaw@sbcglobal.net (use `mailto:chigbulaw@sbcglobal.net`)
+- **Contact form sends to:** chigbulaw@sbcglobal.net (primary) + fsu9913@gmail.com (backup)
+- **Address:** 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758
+- **Website:** https://chigbulaws.com
+- **Google Business Profile:** https://share.google/SVzBMps2zWv25qirL
+- **Facebook:** https://www.facebook.com/chigbulaw
+- **Site design credit:** MLB Marketing LLC (https://mlbmarketingllc.com)
 
-**Production host:** Worker **`chigbulaws`** + R2 **`chigbulaw`** — not Cloudflare Pages. Do **not** point DNS at `chigbulaws.pages.dev` unless you intentionally use the legacy Pages project.
+## BRANDING
 
-1. **`chigbulaws.com` zone** must be in the **same** Cloudflare account as `CLOUDFLARE_ACCOUNT_ID` (see `wrangler.toml`). Add the zone at [dash.cloudflare.com](https://dash.cloudflare.com) if it is missing.
-2. **API token:** **Workers Scripts Edit**, **R2 Object Read/Write**, **Zone DNS Edit**.
-3. **GitHub** → **Settings → Secrets** → `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
-4. **Deploy** (sync R2 + Worker + custom domains):
+- **Colors:** Navy deep `#1a2744`, Gold `#c9a227`, Gold light `#e0b84a`
+- **Fonts:** Playfair Display (headings/serif), Inter (body/sans)
+- **Logo:** Scales of justice SVG (in `public/favicon.svg`)
+- **OG image:** `public/og-image.svg`
 
-   ```bash
-   export CLOUDFLARE_API_TOKEN='...'
-   export CLOUDFLARE_ACCOUNT_ID='bafa242dd95d3fdce72540d20accd0a2'
-   npm ci && npm run deploy
-   ```
+---
 
-   Or DNS cleanup + deploy: `./scripts/cloudflare-go-live.sh`
+## HOW TO ADD A BLOG POST
 
-5. Push to **`master`** → **Actions → Deploy chigbulaws Worker**.
+### For humans (via GitHub web editor)
 
-**Squarespace export:** put files under `squarespace-export/` (reference only; not deployed).
+1. Go to GitHub → this repo → `src/content/blog/`
+2. Click "Add file" → "Create new file"
+3. Name it: `my-new-post-slug.md` (use kebab-case, no spaces)
+4. Paste this template at the top:
 
-## Deployment (legacy Pages)
+```markdown
+---
+title: "Your Post Title Here"
+description: "A one-sentence summary for SEO and the blog listing."
+pubDate: 2026-08-08
+author: "Clifford Chigbu"
+tags: ["family-law", "elk-grove"]
+draft: false
+---
 
-Cloudflare **Pages** is no longer the primary host. Use the Worker workflow above. The old Pages workflow is manual-only (`deploy-cloudflare.yml`).
-
-### Setup Instructions (GitHub Actions)
-
-1. **Get your Cloudflare credentials:**
-   - Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Get your Account ID from the Workers & Pages overview
-   - Create an API Token with "Cloudflare Pages - Edit" permissions
-
-2. **Add GitHub Secrets:**
-   - Go to your GitHub repository Settings → Secrets and variables → Actions
-   - Add the following secrets:
-     - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
-     - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-
-3. **Manual Deployment (Alternative):**
-   ```bash
-   # Install Wrangler CLI
-   npm install -g wrangler
-
-   # Login to Cloudflare
-   wrangler login
-
-   # Deploy
-   wrangler pages deploy . --project-name=chigbulaws
-   ```
-
-### Local Development
-
-This is a static HTML/CSS/JavaScript website. Simply open `index.html` in a browser or use a local server:
-
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx http-server
+Write your post content here in plain text or Markdown.
 ```
 
-## Project Structure
+5. Write the post content below the `---` line
+6. Click "Commit changes"
+7. If Workers Builds is connected, it auto-deploys. Otherwise run `npm run deploy`.
 
-- `index.html` - Homepage
-- `about.html` - About page
-- `contact.html` - Contact page
-- Service pages:
-  - `auto-accident.html`
-  - `bankruptcy-law.html`
-  - `business-law.html`
-  - `family-law.html`
-  - `immigration-law.html`
-  - `personal-injury.html`
-- `blog/` - Blog posts
-- `style.css` - Main stylesheet
-- `forms.css` - Form styles
-- `forms.js` - Bilingual intake form logic
-- `main.js` - Main JavaScript
-- `_redirects` - Cloudflare Pages redirects (301s from old Squarespace URLs)
-- `sitemap.xml` - SEO sitemap
-- `robots.txt` - Search engine crawler instructions
-- `favicon.svg`, `logo.svg`, `og-image.svg` - Brand assets used by browsers, Google Knowledge Panel, and social previews
+**Do not deploy without Bryan's explicit permission.**
 
-## Google Search Console verification
+### For LLMs (when asked to write or edit a blog post)
 
-`index.html` includes a commented-out `google-site-verification` meta tag. After you
-register the property in Search Console, copy the token from the HTML-tag verification
-method and paste it into the `content=""` value, then re-deploy.
+You may ONLY do these things:
 
-## Google Business Profile
+- ✅ Create a new `.md` file in `src/content/blog/`
+- ✅ Edit an existing `.md` file in `src/content/blog/`
+- ✅ Edit text content in existing `.astro` page files
+- ✅ Add entries to `public/_redirects`
 
-The site is configured to support the GBP listing:
-- LocalBusiness / LegalService JSON-LD with NAP, hours, geo, and `sameAs` to the State Bar listing.
-- `logo.svg` is referenced for the Knowledge Panel.
-- `_redirects` preserves all 301s from the old Squarespace URLs that the GBP listing or backlinks may still point to.
+You may NOT do these things:
 
-Keep the NAP **exactly** consistent everywhere (`4815 Laguna Park Drive, Elk Grove, CA 95758` / `916-230-6381`):
-- The GBP listing
-- `index.html` JSON-LD
-- `about.html` and `contact.html`
-- The site footer
+- ❌ Create new `.astro` files or pages
+- ❌ Modify `BaseLayout.astro`, `PracticeLayout.astro`, or any layout file
+- ❌ Change `wrangler.jsonc`, `astro.config.mjs`, or `package.json`
+- ❌ Add new npm dependencies
+- ❌ Change the design, colors, fonts, or styling
+- ❌ Create a new framework or restructure the project
 
-## Features
+### Blog post creation steps for LLMs
 
-- Multi-step bilingual intake forms (English/Spanish)
-- Service area pages for all practice areas
-- Blog with legal insights
-- SEO optimized with schema.org markup
-- Responsive design
-- Facebook integration
-- FAQ schema for rich snippets
+1. Create a file at `src/content/blog/[slug].md`
+2. Use the frontmatter template above
+3. Set `pubDate` to the current date (`YYYY-MM-DD` format)
+4. Choose tags from this list (use 1–3 tags):
+   - `firm-recognition` → "Firm Recognition"
+   - `law-updates` → "Law Updates"
+   - `family-law` → "Family Law"
+   - `immigration` → "Immigration"
+   - `business-law` → "Business Law"
+   - `auto-accident` → "Auto Accident"
+   - `personal-injury` → "Personal Injury"
+   - `divorce` → "Family Law"
+   - `legislation` → "Law Updates"
+   - `california` → "Law Updates"
+   - `sacramento` → "Local Resources"
+   - `elk-grove` → "Local Resources"
+   - `personal-story` → "Immigration"
+   - `compliance` → "Business Law"
+   - `basics` → "Family Law"
+   - `firm-news` → "Firm News"
+5. Set `draft: false` to publish, `draft: true` to hide
+6. Write the body in Markdown (supports headings, lists, bold, links, images, blockquotes)
+7. The post URL will be `chigbulaws.com/blog/[slug]` (no `.html`)
 
-## Troubleshooting: Error 1000 (DNS points to prohibited IP)
+### Blog post rules
 
-DNS for `chigbulaws.com` points at an IP Cloudflare will not use as an origin—often a proxied **A** record to Cloudflare anycast (`104.x`, `172.x`), old **Squarespace** IPs, or a **double proxy**.
+- **Tone:** Professional but accessible. Clifford is an attorney speaking to potential clients.
+- **Voice:** First person when Clifford is sharing personal experience; third person for informational posts.
+- **Length:** 500–1500 words is typical. Longer is fine for comprehensive guides.
+- **Always include:** A call-to-action at the end pointing to `/contact` or `tel:9162306381`
+- **Never include:** Specific legal advice for individual cases. Use general information only.
+- **Disclaimer:** The site has a global disclaimer in the footer. Posts don't need individual disclaimers.
 
-### Fix (about 5 minutes in the dashboard)
+---
 
-Use the **Worker** `chigbulaws`, not the Pages project.
+## SHARING BLOG POSTS TO SOCIAL MEDIA
 
-1. **Workers & Pages** → **`chigbulaws`** (Worker) → **Settings** → **Domains & Routes** → **Add Custom Domain** → `chigbulaws.com` and `www.chigbulaws.com`. Wait until **Active** (or run `npm run deploy` from this repo).
+Yes — blog posts can and should be shared to Google Business Profile, Facebook, and X.com.
 
-2. **DNS** → **Records** for `chigbulaws.com`. **Delete** conflicting records:
-   - **A** / **AAAA** on `@` or `www` pointing to Cloudflare IPs (`104.x`, `172.x`, etc.) or Squarespace
-   - **CNAME** `www` → `ext-cust.squarespace.com` (or similar) while proxied
-   - **CNAME** `@` → `chigbulaws.pages.dev` if you are on the Worker (not Pages)
-   - Duplicate `@` / `www` records from the Squarespace migration
+### Google Business Profile
 
-3. **Do not** create a manual **A** record to a Cloudflare IP. Let **Custom Domain** on the Worker create the correct DNS.
+1. Go to https://business.google.com and log in with the account managing Clifford's profile
+2. Click "Add update" or "Create post"
+3. Copy the blog post title and first paragraph
+4. Add the blog URL: `https://chigbulaws.com/blog/[slug]`
+5. Upload an image if available (or use the OG image at https://chigbulaws.com/og-image.svg)
+6. Add a "Learn more" button linking to the blog post URL
+7. Publish
 
-4. **R2 + deploy:** `npm run sync:r2` then `npm run deploy`. Open `https://chigbulaws.com/`.
+### Facebook
 
-5. Optional: **SSL/TLS** → **Full (strict)**; **Redirect Rule** `www.chigbulaws.com` → `https://chigbulaws.com`.
+1. Go to the firm's Facebook page
+2. Create a new post
+3. Paste the blog URL: `https://chigbulaws.com/blog/[slug]`
+4. Facebook will auto-generate a preview card with the title, description, and OG image
+5. Add a brief intro line above the link (e.g., "New blog post: What to do after a car accident in Elk Grove →")
+6. Publish
 
-**Legacy Pages only:** CNAME `@` / `www` → `chigbulaws.pages.dev` and add custom domains on the **Pages** project — see [GO-LIVE.md](GO-LIVE.md).
+### X.com (Twitter)
 
-Reference: [Error 1000](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1000/), [Worker custom domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
+1. Go to https://x.com and log in to the firm's account
+2. Create a new post
+3. Write a brief hook (1–2 sentences) + the blog URL: `https://chigbulaws.com/blog/[slug]`
+4. X will auto-generate a preview card with the title, description, and OG image
+5. Publish
+
+### Sharing checklist for each new post
+
+- [ ] Blog post published and live on chigbulaws.com
+- [ ] Share to Google Business Profile with image + "Learn more" button
+- [ ] Share to Facebook page with intro text + link
+- [ ] Share to X.com with hook text + link
+- [ ] Verify the OG image preview appears correctly on each platform
+
+---
+
+## EXISTING BLOG POSTS (11 total)
+
+| File | Title | Date | Tags |
+|------|-------|------|------|
+| `back-to-school-custody-elk-grove.md` | Back-to-School Parenting Plans for Elk Grove Families | 2026-08-08 | family-law, elk-grove, sacramento |
+| `best-family-law-attorney-elk-grove-2026.md` | Two Years in a Row: Clifford Chigbu Recognized as a Best Family Law Attorney in Elk Grove | 2026-07-21 | firm-recognition, family-law, elk-grove |
+| `2026-new-laws.md` | 2026: New State and Federal Laws You Need to Know | 2026-03-28 | law-updates, legislation, california |
+| `welcome-to-chigbu-law.md` | A New Chapter for Chigbu Law | 2026-01-15 | firm-news, elk-grove |
+| `gratitude-top-family-attorney.md` | A Moment of Gratitude: Clifford Chigbu Recognized as a Top Family Law Attorney | 2025-12-17 | family-law, firm-recognition, elk-grove |
+| `divorce-sacramento.md` | Navigating Divorce in Sacramento: Local Laws and Resources | 2025-10-18 | family-law, divorce, sacramento |
+| `immigrant-immigration-law.md` | From One Immigrant to Another: Navigating Immigration Law | 2025-09-06 | immigration, personal-story |
+| `business-legal-requirements-sacramento.md` | Business Legal Requirements in Sacramento County | 2025-08-28 | business-law, sacramento, compliance |
+| `california-family-law-basics.md` | California Family Law Basics Every Resident Should Know | 2025-08-28 | family-law, california, basics |
+| `car-accident-elk-grove.md` | What to Do After a Car Accident in Elk Grove | 2025-08-26 | auto-accident, elk-grove, personal-injury |
+| `immigration-changes-2025.md` | Immigration Changes in 2025 — What You Need to Know | 2025-08-26 | immigration, law-updates, 2025 |
+
+### ⚠️ TODO: FILL IN BLOG CONTENT
+
+Several older posts may still need full body text migrated into Markdown stubs when the Astro content collection is fully wired. New posts (including `back-to-school-custody-elk-grove.md`) should ship with complete Markdown bodies.
+
+**Source of original content:**
+
+- GitHub repo: `BelichickGillisMusk/chigbulaws` branch `cursor/schema-patch-181f` in the `blog/` folder
+- Or the original WordPress export (Google Drive)
+- Or the live site at `chigbulaws.com/blog/[slug].html`
+
+**To fill in a post:** Open the `.md` file, remove the `<!-- TODO -->` line, and paste the full article content in Markdown format below the frontmatter.
+
+---
+
+## PAGE STRUCTURE
+
+| File | URL | Purpose |
+|------|-----|---------|
+| `src/pages/index.astro` | `/` | Homepage with hero, services grid, about preview, contact |
+| `src/pages/about.astro` | `/about` | About Clifford Chigbu + office info sidebar |
+| `src/pages/contact.astro` | `/contact` | Contact form + office info + Google Map |
+| `src/pages/family-law.astro` | `/family-law` | Family law practice area |
+| `src/pages/bankruptcy-law.astro` | `/bankruptcy-law` | Bankruptcy practice area |
+| `src/pages/immigration-law.astro` | `/immigration-law` | Immigration practice area |
+| `src/pages/personal-injury.astro` | `/personal-injury` | Personal injury practice area |
+| `src/pages/auto-accident.astro` | `/auto-accident` | Auto accident practice area |
+| `src/pages/business-law.astro` | `/business-law` | Business law practice area |
+| `src/pages/blog/index.astro` | `/blog` | Blog listing (auto-generated from posts) |
+| `src/pages/blog/[...slug].astro` | `/blog/[slug]` | Individual blog post template |
+| `public/404.html` | any unmatched URL | Custom 404 page |
+| `public/_redirects` | old URLs | 301 redirects from Squarespace/WordPress |
+| `public/robots.txt` | `/robots.txt` | SEO crawler instructions |
+| `public/favicon.svg` | `/favicon.svg` | Scales of justice logo |
+| `public/og-image.svg` | `/og-image.svg` | Social media share image |
+
+---
+
+## DEPLOY
+
+### One-time setup: Connect GitHub for auto-deploy
+
+1. Push this code to a GitHub repo
+2. Cloudflare dashboard → Workers & Pages → `chigbulaws` Worker → Settings → Builds
+3. Connect the GitHub repo
+4. Build command: `npm run build`
+5. Deploy command: `npx wrangler deploy`
+6. Production branch: `main`
+
+### After setup, the workflow is
+
+1. Edit or add files on GitHub (web editor or local)
+2. Commit to `main`
+3. Cloudflare auto-builds and deploys
+4. Share new blog posts to Google Business Profile, Facebook, X.com
+
+### Manual deploy
+
+```bash
+npm install
+npm run deploy    # builds + deploys in one command
+```
+
+**Do not deploy without Bryan's explicit permission.**
+
+### Local preview
+
+```bash
+npm install
+npm run dev       # opens at http://localhost:4321
+```
+
+---
+
+## TECH STACK
+
+- **Astro 5** — Static site generator, builds to `./dist`
+- **Cloudflare Workers Static Assets** — Serves files from Cloudflare's edge
+- **Wrangler 4** — CLI for deploying to Cloudflare
+- **Workers Builds** — GitHub integration for auto-deploy (optional but recommended)
+
+## THE 404 FIX
+
+The old Worker had `html_handling: "none"` which caused 404s on clean URLs like `/about`. This project uses Astro's `build.format: "directory"` which generates `/about/index.html`, combined with `html_handling: "auto-trailing-slash"` in `wrangler.jsonc`. No more 404s.
+
+## WRANGLER CONFIG
+
+The `wrangler.jsonc` deploys to the existing `chigbulaws` Worker with routes for:
+
+- `chigbulaws.com/*`
+- `www.chigbulaws.com/*`
+
+Both point to the same Worker. The www variant is handled via the routes directly.
+
+## RELATED FILES
+
+- `.cursorrules` — mandatory Cursor/LLM operating rules
+- `agents/HERMES-BLOG-AGENT.md` — monthly blog/share subagent training card
+- `SEO-AGENT.md` — broader SEO / backlink safety rules

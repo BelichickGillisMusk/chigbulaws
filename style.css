@@ -532,6 +532,17 @@ button { font-family: var(--sans); cursor: pointer; }
   position: relative;
   z-index: 1;
 }
+.award-gbp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.award-gbp-link:hover .g-reviews {
+  color: rgba(255,255,255,.95);
+  text-decoration: underline;
+}
 .g-logo {
   font-size: 18px;
   font-weight: 700;

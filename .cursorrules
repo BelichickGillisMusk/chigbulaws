@@ -1,0 +1,110 @@
+# CLIFFORD CHIGBU ATTORNEY AT LAW — CURSOR AI INSTRUCTIONS
+
+> **MANDATORY:** Read this file before making any changes to this project.
+> The user (Bryan) must approve any architectural changes before you make them.
+
+## PROJECT OVERVIEW
+
+This is the website for Clifford Chigbu, Attorney at Law, in Elk Grove, CA.
+Built with Astro 5, deployed on Cloudflare Workers Static Assets.
+
+## BUSINESS INFO
+
+- **Name:** Clifford Chigbu, Attorney at Law
+- **Phone:** 916-230-6381
+- **Email:** chigbulaw@sbcglobal.net
+- **Intake email (contact form):** chigbulaw@sbcglobal.net AND fsu9913@gmail.com
+- **Address:** 4815 Laguna Park Dr, Suite C, Elk Grove, CA 95758
+- **Website:** https://chigbulaws.com
+- **Google Business Profile:** https://share.google/SVzBMps2zWv25qirL
+- **Facebook:** https://www.facebook.com/chigbulaw
+- **X.com:** share firm posts when publishing blog updates (use the live post URL)
+- **Site design credit:** MLB Marketing LLC (https://mlbmarketingllc.com)
+
+## WHAT YOU CAN DO (no approval needed)
+
+1. **Add blog posts:** Create a new `.md` file in `src/content/blog/`
+2. **Edit blog posts:** Modify existing `.md` files in `src/content/blog/`
+3. **Edit text content:** Change text in existing `.astro` page files (typos, wording, facts)
+4. **Add redirects:** Add new entries to `public/_redirects`
+
+## WHAT YOU CANNOT DO (requires Bryan's approval)
+
+1. Do NOT create new `.astro` files or pages
+2. Do NOT modify `BaseLayout.astro` or `PracticeLayout.astro` (layout/design files)
+3. Do NOT change `wrangler.jsonc`, `astro.config.mjs`, or `package.json`
+4. Do NOT add new npm dependencies
+5. Do NOT change the design, colors, fonts, or styling
+6. Do NOT restructure the project or change the tech stack
+7. Do NOT delete any existing files
+8. Do NOT deploy without Bryan's explicit permission
+9. Do NOT touch any other Worker or project folder
+10. Do NOT change any URL paths, redirects, or page structure (SEO protection)
+
+## BLOG POST TEMPLATE
+
+```markdown
+---
+title: "Post Title Here"
+description: "One-sentence summary for SEO and blog listing."
+pubDate: 2026-08-08
+author: "Clifford Chigbu"
+tags: ["family-law", "elk-grove"]
+draft: false
+---
+
+Write the post content here in Markdown.
+```
+
+## BLOG TAGS (use 1-3 per post)
+
+| Tag | Shows as category |
+|-----|-------------------|
+| firm-recognition | Firm Recognition |
+| law-updates | Law Updates |
+| family-law | Family Law |
+| immigration | Immigration |
+| business-law | Business Law |
+| auto-accident | Auto Accident |
+| personal-injury | Personal Injury |
+| divorce | Family Law |
+| legislation | Law Updates |
+| california | Law Updates |
+| sacramento | Local Resources |
+| elk-grove | Local Resources |
+| personal-story | Immigration |
+| compliance | Business Law |
+| basics | Family Law |
+| firm-news | Firm News |
+
+## BLOG POST RULES
+
+- **Tone:** Professional but accessible. Attorney speaking to potential clients.
+- **Voice:** First person for personal stories; third person for informational posts.
+- **Length:** 500-1500 words typical.
+- **Always end with:** A call-to-action pointing to `/contact` or calling 916-230-6381.
+- **Never include:** Specific legal advice for individual cases.
+- **No disclaimer needed:** Global disclaimer is in the footer.
+
+## SOCIAL SHARING (after each published post)
+
+Prepare share drafts (do not auto-publish unless Bryan asks):
+
+1. **Google Business Profile** — post under 1,500 characters + live URL: https://share.google/SVzBMps2zWv25qirL
+2. **Facebook** — caption + live URL for https://www.facebook.com/chigbulaw
+3. **X.com** — short caption + live URL
+
+## DEPLOY
+
+```bash
+npm install
+npm run deploy    # builds + deploys to Cloudflare Workers
+```
+
+Or if GitHub auto-deploy is connected, just `git push` to `main`.
+
+**Do not deploy without Bryan's explicit permission.**
+
+## THE 404 FIX
+
+The old Worker had `html_handling: "none"` causing 404s on clean URLs. This project uses Astro `build.format: "directory"` + `html_handling: "auto-trailing-slash"`. Do not change these settings.

@@ -10,10 +10,12 @@ ORG="${GITHUB_ORG:-BelichickGillisMusk}"
 REPO="${GITHUB_REPO:-BelichickGillisMusk/chigbulaws}"
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
-  if printenv | grep -qi '^cloudflare token='; then
-    eval "$(printenv | grep -i '^cloudflare token=' | sed 's/^cloudflare token=/CLOUDFLARE_API_TOKEN=/' | head -1)"
+  _token_val="$(printenv | grep -i '^cloudflare token=' | sed 's/^[^=]*=//' | head -1)"
+  if [[ -n "${_token_val}" ]]; then
+    CLOUDFLARE_API_TOKEN="${_token_val}"
     export CLOUDFLARE_API_TOKEN
   fi
+  unset _token_val
 fi
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
@@ -33,9 +35,9 @@ echo "Account ID:   ${ACCOUNT_ID}"
 echo "Token length: ${#CLOUDFLARE_API_TOKEN}"
 
 set_org() {
-  echo -n "${CLOUDFLARE_API_TOKEN}" | gh secret set CLOUDFLARE_API_TOKEN -o "${ORG}" --visibility all -a actions
-  echo -n "${ACCOUNT_ID}" | gh variable set CLOUDFLARE_ACCOUNT_ID -o "${ORG}" --visibility all
-  echo "Set org secret CLOUDFLARE_API_TOKEN and org variable CLOUDFLARE_ACCOUNT_ID."
+  echo -n "${CLOUDFLARE_API_TOKEN}" | gh secret set CLOUDFLARE_API_TOKEN -o "${ORG}" --visibility selected --repos "${REPO##*/}" -a actions
+  echo -n "${ACCOUNT_ID}" | gh variable set CLOUDFLARE_ACCOUNT_ID -o "${ORG}" --visibility selected --repos "${REPO##*/}"
+  echo "Set org secret CLOUDFLARE_API_TOKEN and org variable CLOUDFLARE_ACCOUNT_ID (scoped to ${REPO##*/})."
 }
 
 set_repo() {

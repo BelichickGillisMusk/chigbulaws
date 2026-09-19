@@ -9,12 +9,15 @@ R2_BUCKET="${R2_BUCKET_NAME:-chigbulaw}"
 MINIMAL="${DEPLOY_MINIMAL:-0}"
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
-  if [[ -n "${cloudflare token:-}" ]]; then
-    export CLOUDFLARE_API_TOKEN="${cloudflare token}"
+  _token_val="$(printenv | grep -i '^cloudflare token=' | sed 's/^[^=]*=//' | head -1)"
+  if [[ -n "${_token_val}" ]]; then
+    CLOUDFLARE_API_TOKEN="${_token_val}"
+    export CLOUDFLARE_API_TOKEN
   else
     echo "Set CLOUDFLARE_API_TOKEN (or cloudflare token in Cursor secrets)." >&2
     exit 1
   fi
+  unset _token_val
 fi
 
 api() {

@@ -52,11 +52,20 @@ function cacheHeaders(key: string): Record<string, string> {
   return { "Cache-Control": "public, max-age=3600" };
 }
 
+const SECURITY_HEADERS: Record<string, string> = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+};
+
 function objectHeaders(key: string, object: R2ObjectBody): Headers {
   const h = new Headers();
   h.set("Content-Type", contentType(key, object));
   const cache = cacheHeaders(key);
   for (const [k, v] of Object.entries(cache)) h.set(k, v);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) h.set(k, v);
   if (object.httpEtag) h.set("ETag", object.httpEtag);
   return h;
 }

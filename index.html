@@ -18,67 +18,134 @@
 
   <!-- Schema.org: LocalBusiness + Attorney -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["LegalService", "LocalBusiness"],
-    "@id": "https://chigbulaws.com/#legalservice",
-    "name": "Clifford Chigbu Attorney at Law",
-    "alternateName": "Chigbu Law",
-    "url": "https://chigbulaws.com",
-    "logo": "https://chigbulaws.com/logo.svg",
-    "image": "https://chigbulaws.com/logo.svg",
-    "description": "Top-rated family law, immigration, business, bankruptcy, and personal injury attorney in Elk Grove, CA. Serving Sacramento, Stockton, and Northern California.",
-    "telephone": "+19162306381",
-    "email": "chigbulaw@sbcglobal.net",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "4815 Laguna Park Drive, Suite C",
-      "addressLocality": "Elk Grove",
-      "addressRegion": "CA",
-      "postalCode": "95758",
-      "addressCountry": "US"
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "LegalService",
+    "LocalBusiness"
+  ],
+  "@id": "https://chigbulaws.com/#legalservice",
+  "name": "Clifford Chigbu Attorney at Law",
+  "alternateName": "Chigbu Law",
+  "url": "https://chigbulaws.com",
+  "logo": "https://chigbulaws.com/logo.svg",
+  "image": "https://chigbulaws.com/logo.svg",
+  "description": "Top-rated family law, immigration, business, bankruptcy, and personal injury attorney in Elk Grove, CA. Serving Sacramento, Stockton, and Northern California.",
+  "telephone": "+19162306381",
+  "email": "chigbulaw@sbcglobal.net",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4815 Laguna Park Drive, Suite C",
+    "addressLocality": "Elk Grove",
+    "addressRegion": "CA",
+    "postalCode": "95758",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 38.4286712,
+    "longitude": -121.4470022
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  ],
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Elk Grove"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 38.4286712,
-      "longitude": -121.4470022
+    {
+      "@type": "City",
+      "name": "Sacramento"
     },
-    "openingHoursSpecification": [
+    {
+      "@type": "City",
+      "name": "Stockton"
+    },
+    {
+      "@type": "City",
+      "name": "Hayward"
+    },
+    {
+      "@type": "City",
+      "name": "Fairfield"
+    },
+    {
+      "@type": "City",
+      "name": "Roseville"
+    }
+  ],
+  "priceRange": "$$",
+  "sameAs": [
+    "https://apps.calbar.ca.gov/attorney/Licensee/Detail/221386",
+    "https://www.facebook.com/chigbulaw",
+    "https://share.google/SVzBMps2zWv25qirL"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Legal Services",
+    "itemListElement": [
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "09:00",
-        "closes": "17:00"
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Family Law"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Immigration Law"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Business Law"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Bankruptcy Law"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Auto Accident Law"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Personal Injury Law"
+        }
       }
-    ],
-    "areaServed": [
-      {"@type": "City", "name": "Elk Grove"},
-      {"@type": "City", "name": "Sacramento"},
-      {"@type": "City", "name": "Stockton"},
-      {"@type": "City", "name": "Hayward"},
-      {"@type": "City", "name": "Fairfield"},
-      {"@type": "City", "name": "Roseville"}
-    ],
-    "priceRange": "$$",
-    "sameAs": [
-      "https://apps.calbar.ca.gov/attorney/Licensee/Detail/221386",
-      "https://www.facebook.com/chigbulaw",
-      "https://share.google/SVzBMps2zWv25qirL"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Legal Services",
-      "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Family Law"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Immigration Law"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Business Law"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bankruptcy Law"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Auto Accident Law"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Personal Injury Law"}}
-      ]
-    },
-    "award": "BusinessRate Best of 2025 & 2026 — Family Law Attorney, Elk Grove, California"
-  }
+    ]
+  },
+  "award": "BusinessRate Best of 2025 & 2026 — Family Law Attorney, Elk Grove, California",
+  "knowsLanguage": [
+    "en",
+    "es"
+  ]
+}
   </script>
 
   <!-- Schema.org: Person (Attorney) -->
@@ -408,6 +475,7 @@
         </div>
 
       </div>
+      <p class="testimonial-disclaimer" style="font-size:0.85rem;color:rgba(255,255,255,0.8);text-align:center;max-width:760px;margin:1.25rem auto 0;">This testimonial or endorsement does not constitute a guarantee, warranty, or prediction regarding the outcome of your legal matter.</p>
     </div>
   </section>
 
@@ -418,14 +486,12 @@
     <div class="section-inner about-inner">
       <div class="about-text">
         <h2 class="about-title" id="about-heading">Clifford Chigbu<br>Attorney at Law</h2>
-        <h3 class="about-subtitle">Your Dedicated Legal Advocates in Elk Grove</h3>
-        <p>Life's unexpected challenges often demand expert legal guidance. At Chigbu Law, we are committed to providing compassionate and effective legal representation to individuals and families in Elk Grove and beyond.</p>
         <p>As your local legal ally, we understand the unique needs of our community. We offer a wide range of services to safeguard your interests in every aspect of your life:</p>
 
         <ul class="about-services-list">
           <li><strong>Personal Injury</strong> — We fight tirelessly to secure the compensation you deserve. Free consultations available.</li>
           <li><strong>Immigration Law</strong> — Expert guidance on citizenship, deportation defense, business immigration, and visas.</li>
-          <li><strong>Estate Planning</strong> — Comprehensive services including probate, wills, and trusts to protect your legacy.</li>
+          <li><strong><a href="/estate-planning.html">Estate Planning</a></strong> — Comprehensive services including probate, wills, and trusts to protect your legacy.</li>
           <li><strong>Family Law</strong> — Compassionate support in adoption, divorce, child custody, and support matters.</li>
           <li><strong>Bankruptcy Law</strong> — Chapter 7 guidance offering a fresh financial start.</li>
           <li><strong>Business Law</strong> — Protecting your interests in contract disputes, employment issues, and more.</li>
